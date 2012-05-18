@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>进销存系统首页</title>
+	<link rel="stylesheet" type="text/css" href="../js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../js/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<script type="text/javascript" src="../js/application.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+	<script>
+		$(function(){
+		});
+	</script>
+</head>
+<body class="easyui-layout">
+	<div region="north" split="true" style="height:80px;">
+		<div id="head-title">
+			超市进销存管理系统
+		</div>
+	</div>
+	<div region="south" split="true" style="height:30px;padding:10px;background:#f2f6ff;">
+		<div fit="true" style="background:#f2f6ff;">
+		</div>
+	</div>
+	<div region="west" split="true" title="导航栏" style="width:280px;padding1:1px;overflow:hidden;">
+		<div class="easyui-accordion" fit="true" border="false">
+			<div title="采购管理" style="padding:10px;overflow:auto;">
+				<p>采购申请</p>
+			</div>
+			<div title="库存管理" selected="true" style="padding:10px;">
+				<p><a href="">商品入库</a></p>
+				<p>商品退库</p>
+				<p>入/出库单</p>
+				<p>废品管理</p>
+				<p>库存盘点</p>
+				<p>库存履历查询</p>
+			</div>
+			<div title="货架管理" style="padding:10px">
+				<p>货架基本信息管理</p>
+				<p>货架商品信息维护</p>
+				<p>商品上架</p>
+				<p>商品下架</p>
+			</div>
+			<div title="销售管理" style="padding:10px">
+				<p>商品出售</p>
+				<p>商品退货</p>
+			</div>
+			<div title="财务管理" style="padding:10px">
+				<p>应收管理</p>
+				<p>应付管理</p>
+				<p>支付履历管理</p>
+			</div>
+			<div title="系统功能" style="padding:10px">
+				<p>供应商信息管理</p>
+				<p>系统用户管理</p>
+				<p>商品大类管理</p>
+				<p>商品中类管理</p>
+				<p>商品小类管理</p>
+				<p>商品信息管理</p>
+			</div>
+		</div>
+	</div>
+	<div region="center" title="主操作区" style="overflow:hidden;">
+		<div class="easyui-tabs" fit="true" border="false">
+			<%= yield %>
+		</div>
+	</div>
+</body>
+</html>
