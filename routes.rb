@@ -1,3 +1,3 @@
 get "/" do
-	"Hello It\'s OK!"
+	Admin.count.to_s
 end
