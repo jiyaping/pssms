@@ -1,0 +1,100 @@
+/*全局设定*/
+a{
+
+}
+
+a:hover{
+
+}
+ul{
+	
+	list-style:none;
+	text-decoration:none;
+}
+li{
+	list-style:none;
+	text-decoration:none;
+}
+
+/*标题描述*/
+#head{
+	background-color:#2C4056;
+}
+#head-title{
+	color: white;
+    font-size: 19px;
+    margin-left: 10px;
+    padding-top: 5px;
+}
+#head-title span{
+	color: white;
+}
+
+#head-title #logout{
+	float:right;
+	margin: 5px;
+    padding-right: 20px;
+}
+#head-title #logout a{
+	float:right;
+	font-size:12px;
+	color:white;
+	text-decoration:none;
+}
+
+#head-title #logout a:hover{
+	background-color:white;
+	color:#2C4056;
+}
+
+/*左边的导航栏描述*/
+#nav{
+
+}
+
+#nav li{
+	padding:5px 15px;
+}
+
+#nav div{
+}
+
+#nav li a{
+	text-decoration:none;
+	font-size:13px;
+	color:blue;
+}
+
+/*footer描述*/
+#foot{
+	background-color:#2C4056;
+}
+
+#status-bar{
+	margin: 0px;
+	padding:3px 0 0;
+}
+
+.status-bar-title{
+	color:#B5B9BA;
+}
+.status-bar-value{
+	color:white;
+	margin-right:100px;
+}
+.status-bar-poweredby{
+	float: right;
+	color:#B5B9BA;
+	margin-right:25px;
+}
+
+.status-bar-poweredby a{
+	color:white;
+	font-style:italic;
+	text-decoration:none;
+}
+
+.status-bar-poweredby a:hover{
+	color:black;
+	background-color:white;
+}

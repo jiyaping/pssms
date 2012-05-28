@@ -1,6 +1,10 @@
-require 'active_record'
+# encoding: utf-8
 
-#require_relative 'lib/*.rb'
+require 'active_record'
+require "json"
+require "logger"
+
+require_relative 'lib/ActiveRecord.rb'
 
 # Plugins.
 Dir['plugins/*.rb'].each { |plugin| require_relative plugin }  
@@ -20,6 +24,9 @@ require_relative 'migration'
 # Sinatra configurations.
 configure do
   enable :sessions
+  set :logging, :true
+  Log = Logger.new("sinatra.log")
+  Log.level  = Logger::DEBUG
 end
 
 # Application helpers.

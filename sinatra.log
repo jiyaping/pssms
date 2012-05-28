@@ -1,0 +1,45 @@
+I, [2012-05-27T21:39:31.686687 #1583]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T21:39:31.707594 #1583] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-27T21:39:34.744455 #1589]  INFO -- : jiyaping  /typeone  {}
+D, [2012-05-27T21:39:34.764112 #1589] DEBUG -- : {}
+I, [2012-05-27T21:39:43.045136 #1595]  INFO -- : jiyaping  /typetwo/save  {"id"=>"1", "type_no"=>"NO002", "name"=>"test", "type_one_id"=>"NO002", "name_s"=>"test", "use_flag"=>"0"}
+D, [2012-05-27T21:39:43.045647 #1595] DEBUG -- : {"id"=>"1", "type_no"=>"NO002", "name"=>"test", "type_one_id"=>"NO002", "name_s"=>"test", "use_flag"=>"0"}
+I, [2012-05-27T21:39:50.358270 #1603]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T21:39:50.379031 #1603] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-27T21:39:57.613557 #1608]  INFO -- : jiyaping  /typeone  {}
+D, [2012-05-27T21:39:57.634482 #1608] DEBUG -- : {}
+I, [2012-05-27T21:40:14.921795 #1616]  INFO -- : jiyaping  /typeone  {}
+D, [2012-05-27T21:40:14.941966 #1616] DEBUG -- : {}
+I, [2012-05-27T21:40:58.053377 #1629]  INFO -- : jiyaping  /typeone  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T21:40:58.074295 #1629] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-27T21:42:16.113159 #1655]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T21:42:16.134143 #1655] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-27T21:42:19.737377 #1661]  INFO -- : jiyaping  /typeone  {}
+D, [2012-05-27T21:42:19.756895 #1661] DEBUG -- : {}
+I, [2012-05-27T21:43:03.548829 #1674]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T21:43:03.588443 #1674] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-27T22:07:47.852065 #2268]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:07:47.955980 #2268] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:07:53.690625 #2273] DEBUG -- : {"splat"=>[], "captures"=>["typeone"], "type_id"=>"typeone"}
+D, [2012-05-27T22:08:03.516603 #2279] DEBUG -- : {"splat"=>[], "captures"=>["typeone"], "type_id"=>"typeone"}
+I, [2012-05-27T22:10:03.836454 #2327]  INFO -- : jiyaping  /user  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:10:03.864220 #2327] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-27T22:10:09.910874 #2333]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:10:09.931119 #2333] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:10:13.722092 #2337] DEBUG -- : {"splat"=>[], "captures"=>["typeone"], "type_id"=>"typeone"}
+D, [2012-05-27T22:10:58.671026 #2354] DEBUG -- : {"splat"=>[], "captures"=>["typeone"], "type_id"=>"typeone"}
+I, [2012-05-27T22:11:45.381038 #2371]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:11:45.401163 #2371] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:11:51.672762 #2376] DEBUG -- : {"splat"=>[], "captures"=>["TypeOno"], "type_id"=>"TypeOno"}
+D, [2012-05-27T22:12:14.552274 #2385] DEBUG -- : {"splat"=>[], "captures"=>["TypeOno"], "type_id"=>"TypeOno"}
+I, [2012-05-27T22:12:24.174532 #2390]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:12:24.194930 #2390] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:12:30.080674 #2397] DEBUG -- : {"splat"=>[], "captures"=>["TypeOne"], "type_id"=>"TypeOne"}
+I, [2012-05-27T22:13:07.925247 #2409]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-27T22:13:07.945351 #2409] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-28T09:00:20.482024 #2721]  INFO -- : jiyaping  /user  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-28T09:00:20.511567 #2721] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-28T09:00:27.336465 #2727]  INFO -- : jiyaping  /typeone  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-28T09:00:27.357460 #2727] DEBUG -- : {"page"=>"1", "rows"=>"13"}
+I, [2012-05-28T09:00:31.365506 #2732]  INFO -- : jiyaping  /typetwo  {"page"=>"1", "rows"=>"13"}
+D, [2012-05-28T09:00:31.385399 #2732] DEBUG -- : {"page"=>"1", "rows"=>"13"}

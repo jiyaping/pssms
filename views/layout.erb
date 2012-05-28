@@ -3,68 +3,136 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>进销存系统首页</title>
-	<link rel="stylesheet" type="text/css" href="../js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../js/themes/gray/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../js/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<script type="text/javascript" src="../js/application.js"></script>
 	<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../js/locale/easyui-lang-zh_CN.js"></script>
 	<script>
+		//改变颜色
 		$(function(){
+			$("div>li").bind({
+				mouseover:function(){
+					$(this).css("background-color","#2c4056");
+					$(this).children().css("color","white");
+				},
+				mouseout:function(){
+					$(this).css("background-color","#FFF");
+					$(this).children().css("color","blue");
+				}
+			});
+
+			startTime();
+			setPrivilege();
 		});
+
+		//添加标签
+		function addTab(pTitle,pURL){
+			$('#tt').tabs('add',{
+				title:pTitle,
+				href:pURL,
+				closable:true,
+				tools:[{
+					iconCls:'icon-mini-refresh',
+					handler:function(){
+						var tab = $('#tt').tabs('getSelected');
+						alert(tab);
+						$("#tt").tabs("update",{
+							tab:tab,
+							options:{
+								href:pURL
+							}
+						})
+					}
+				}]
+			});
+		}
+
+		function startTime(){
+			var today = new Date();
+			var H = checkTime(today.getHours());
+			var M = checkTime(today.getMinutes());
+			var S = checkTime(today.getSeconds());
+			var YYYY = today.getFullYear();
+			var MM = checkTime(today.getMonth());
+			var dd = checkTime(today.getDate());
+			document.getElementById('current_time').innerHTML = YYYY+'年'+MM+'月'+dd+'日 '+ H+':'+M+':'+S;
+			setTimeout('startTime()',500);
+		};
+
+		function checkTime(i){
+			if(i<10){
+				return "0"+i;
+			}else{
+				return i;
+			}
+		}
+
+		function setPrivilege(){
+			document.getElementById('current_privilege').innerHTML = InfoChange(1,'<%=session["privilege"]%>');
+		}
 	</script>
 </head>
 <body class="easyui-layout">
-	<div region="north" split="true" style="height:80px;">
+	<div region="north" style="height:40px;" id="head">
 		<div id="head-title">
-			超市进销存管理系统
+			<span>超市进销存管理系统</span>
+			<span id="logout"><a href="/logout"><img src="../images/logout.png" style="width:12px;height:10px;" alt="logout">&nbsp;退&nbsp;出</a></span>
 		</div>
 	</div>
-	<div region="south" split="true" style="height:30px;padding:10px;background:#f2f6ff;">
-		<div fit="true" style="background:#f2f6ff;">
+	<div region="south" id="foot" style="height:25px;">
+		<div id="status-bar">
+			<span class="status-bar-title">当前用户：</span>
+			<span class="status-bar-value"><%= session[:login_id]%></span>
+			<span class="status-bar-title">当前权限：</span>
+			<span class="status-bar-value" id="current_privilege"></span>
+			<span class="status-bar-title">当前时间：</span>
+			<span class="status-bar-value" id="current_time"></span>
+			<span class="status-bar-poweredby">Powered By <a href="mailto:jiyaping0802@gmail.com">jiyaping</a></span>
 		</div>
 	</div>
-	<div region="west" split="true" title="导航栏" style="width:280px;padding1:1px;overflow:hidden;">
+	<div region="west" id="nav" split="true" title="导航栏" style="width:280px;padding1:1px;overflow:hidden;">
 		<div class="easyui-accordion" fit="true" border="false">
-			<div title="采购管理" style="padding:10px;overflow:auto;">
-				<p>采购申请</p>
+			<div title="采购管理">
+				<li><a href="">采购申请</a></li>
 			</div>
-			<div title="库存管理" selected="true" style="padding:10px;">
-				<p><a href="">商品入库</a></p>
-				<p>商品退库</p>
-				<p>入/出库单</p>
-				<p>废品管理</p>
-				<p>库存盘点</p>
-				<p>库存履历查询</p>
+			<div title="库存管理">
+				<li><a href="#">商品入库</a></li>
+				<li><a href="">商品退库</a></li>
+				<li><a href="">入/出库单</a></li>
+				<li><a href="">废品管理</a></li>
+				<li><a href="">库存盘点</a></li>
+				<li><a href="">库存履历查询</a></li>
 			</div>
-			<div title="货架管理" style="padding:10px">
-				<p>货架基本信息管理</p>
-				<p>货架商品信息维护</p>
-				<p>商品上架</p>
-				<p>商品下架</p>
+			<div title="货架管理">
+				<li><a href="">货架基本信息管理</a></li>
+				<li><a href="">货架商品信息维护</a></li>
+				<li><a href="">商品上架</a></li>
+				<li><a href="">商品下架</a></li>
 			</div>
-			<div title="销售管理" style="padding:10px">
-				<p>商品出售</p>
-				<p>商品退货</p>
+			<div title="销售管理">
+				<li><a href="">商品出售</a></li>
+				<li><a href="">商品退货</a></li>
 			</div>
-			<div title="财务管理" style="padding:10px">
-				<p>应收管理</p>
-				<p>应付管理</p>
-				<p>支付履历管理</p>
+			<div title="财务管理">
+				<li><a href="">应收管理</a></li>
+				<li><a href="">应付管理</a></li>
+				<li><a href="">支付履历管理</a></li>
 			</div>
-			<div title="系统功能" style="padding:10px">
-				<p>供应商信息管理</p>
-				<p>系统用户管理</p>
-				<p>商品大类管理</p>
-				<p>商品中类管理</p>
-				<p>商品小类管理</p>
-				<p>商品信息管理</p>
+			<div title="系统功能"  selected="true">
+				<li><a href="">供应商信息管理</a></li>
+				<li onclick="javascript:addTab('用户管理','pages/users.html');return false;"><a href="javascript:void(0);" >系统用户管理</a></li>
+				<li onclick="javascript:addTab('商品大类管理','pages/typeone.html');return false;"><a href="javascript:void(0);">商品大类管理</a></li>
+				<li onclick="javascript:addTab('商品中类管理','pages/typetwo.html');return false;"><a href="javascript:void(0);">商品中类管理</a></li>
+				<li><a href="">商品小类管理</a></li>
+				<li><a href="">商品信息管理</a></li>
 			</div>
 		</div>
 	</div>
-	<div region="center" title="主操作区" style="overflow:hidden;">
-		<div class="easyui-tabs" fit="true" border="false">
-			<%= yield %>
+	<div region="center" style="overflow:hidden;">
+		<div class="easyui-tabs" id="tt" fit="true" border="false">
 		</div>
 	</div>
 </body>
