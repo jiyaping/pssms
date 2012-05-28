@@ -12,10 +12,10 @@ Dir['plugins/*.rb'].each { |plugin| require_relative plugin }
 # Database connection.
 
 #Connection to sqlite3
-# ActiveRecord::Base.establish_connection(
-# 	:adapter=>"sqlite3",
-# 	:database=>"main.sqlite3"
-# )
+ActiveRecord::Base.establish_connection(
+	:adapter=>"sqlite3",
+	:database=>"main.sqlite3"
+)
 
 #Connection to mysql
 # ActiveRecord::Base.establish_connection(
@@ -28,15 +28,15 @@ Dir['plugins/*.rb'].each { |plugin| require_relative plugin }
 
 
 #Connection to postgresql
-db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
-ActiveRecord::Base.establish_connection(
-  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-  :host     => db.host,
-  :username => db.user,
-  :password => db.password,
-  :database => db.path[1..-1],
-  :encoding => 'utf8'
-)
+# db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
+# ActiveRecord::Base.establish_connection(
+#   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+#   :host     => db.host,
+#   :username => db.user,
+#   :password => db.password,
+#   :database => db.path[1..-1],
+#   :encoding => 'utf8'
+# )
 
 # Database models.
 Dir['models/*.rb'].each { |model| require_relative model }
