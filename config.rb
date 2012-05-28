@@ -28,6 +28,7 @@ Dir['plugins/*.rb'].each { |plugin| require_relative plugin }
 
 
 #Connection to postgresql
+db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
 ActiveRecord::Base.establish_connection(
   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
   :host     => db.host,
