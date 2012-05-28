@@ -8,7 +8,7 @@
             height:200,
             pageList:[13,20,50,100],
             striped:true,
-            url:"/typeone",
+            url:"/TypeOne",
             idField:"id",
             singleSelect:true,
             columns:[[
@@ -81,7 +81,7 @@
             if(d){
             $.ajax({
                 type:"POST",
-                url:"/typeone/delete",
+                url:"/TypeOne/delete",
                 data:"id="+selected.id,
                 success:function(data){
                     if(data!=""){
@@ -108,8 +108,8 @@
             $.ajax({
             type:'POST',
             dataType:"json",
-            url:'/typeone/save',
-            data:obj,
+            url:'/TypeOne/save',
+            data:{"data":obj},
             success:function(data){
                 if(data.error_type=='-1'){
                     $.messager.alert('error',data.message,'error',function(){
@@ -149,7 +149,7 @@
         queryParams.queryWord = $('#qq').val();
         queryParams.queryType = $('#ss').val();
         $('#dg').datagrid({
-            url:'/typeone'
+            url:'/TypeOne'
         });
         $('#query').window('close');
     }

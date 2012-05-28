@@ -5,107 +5,47 @@ get "/" do
 end
 
 =begin
-	信息模块
+	主功能模块管理
 =end
 
-################## 用户管理 ##################
-post "/user" do
+################## 基础信息模块 ##################
+post "/:type/:fields" do
 	logger_user(request.path,params.inspect)
-
-	content_type 'applicaton/json'
-	total = session[:total] || User.count
-	queryHash = {}
-	queryHash = {params["queryType"]=>params["queryWord"]} unless params["queryType"].nil?
-	return_hash={:total=>total,:rows=>User.easyui_rows(params["page"],params["rows"],queryHash)}
 	Log.debug "#{params.inspect}"
+	content_type 'applicaton/json'
+	total = session[:total] || eval(params["type"]).count
+	queryHash = {} 			#查询参数
+	add_fields = {}			#额外添加的field
+	add_fields = str_to_hash(params["fields"]) unless params["fields"]=="nil" 
+	queryHash = {params["queryType"]=>params["queryWord"]} if !params["queryType"].nil? and params["queryWord"]!=""
+	Log.debug "#{params[:type]} #{params[:page]} #{params["rows"]} #{queryHash} #{add_fields}"
+	return_hash={:total=>total,:rows=>
+		eval(params[:type]).easyui_rows(params["page"],params["rows"],queryHash,add_fields)}
+	Log.debug "#{return_hash}"
 	return_hash.to_json
 end
 
-post "/user/delete" do
+post "/:type/delete" do
 	logger_user(request.path,params.inspect)
 
 	content_type 'text/plain',:charset=>'utf-8'
 	Log.debug "#{params.inspect}"
-	"delete failed !" if !User.find(params["id"]).destroy
+	"delete failed !" if !eval(params[:type]).find(params["id"]).destroy
 end
 
-post "/user/save" do
+post "/:type/save" do
 	logger_user(request.path,params.inspect)
 
 	content_type 'applicaton/json',:charset=>'utf-8'
 	Log.debug "#{params.inspect}"
-	if User.save_or_update(params,session[:login_id])
+	if eval(params[:type]).save_or_update(params["data"],session[:login_id])
 		{message: "保存成功",error_type: "0"}.to_json
 	else
 		{message: "内部数据错误，请联系管理员",error_type: "-1"}.to_json
 	end
 end
 
-################## 大类管理 ##################
-post "/typeone" do
-	logger_user(request.path,params.inspect)
 
-	content_type 'applicaton/json'
-	total = session[:total] || User.count
-	queryHash = {}
-	queryHash = {params["queryType"]=>params["queryWord"]} unless params["queryType"].nil?
-	return_hash={:total=>total,:rows=>TypeOne.easyui_rows(params["page"],params["rows"],queryHash)}
-	Log.debug "#{params.inspect}"
-	return_hash.to_json
-end
-
-post "/typeone/delete" do
-	logger_user(request.path,params.inspect)
-
-	content_type 'text/plain',:charset=>'utf-8'
-	Log.debug "#{params.inspect}"
-	"delete failed !" if !TypeOne.find(params["id"]).destroy
-end
-
-post "/typeone/save" do
-	logger_user(request.path,params.inspect)
-
-	content_type 'applicaton/json',:charset=>'utf-8'
-	Log.debug "#{params.inspect}"
-	if TypeOne.save_or_update(params,session[:login_id])
-		{message: "保存成功",error_type: "0"}.to_json
-	else
-		{message: "内部数据错误，请联系管理员",error_type: "-1"}.to_json
-	end
-end
-
-################## 中类管理 ##################
-post "/typetwo" do
-	logger_user(request.path,params.inspect)
-
-	content_type 'applicaton/json'
-	total = session[:total] || User.count
-	queryHash = {}
-	queryHash = {params["queryType"]=>params["queryWord"]} unless params["queryType"].nil?
-	return_hash={:total=>total,:rows=>TypeTwo.easyui_rows(params["page"],params["rows"],queryHash)}
-	Log.debug "#{params.inspect}"
-	return_hash.to_json
-end
-
-post "/typetwo/delete" do
-	logger_user(request.path,params.inspect)
-
-	content_type 'text/plain',:charset=>'utf-8'
-	Log.debug "#{params.inspect}"
-	"delete failed !" if !TypeTwo.find(params["id"]).destroy
-end
-
-post "/typetwo/save" do
-	logger_user(request.path,params.inspect)
-
-	content_type 'applicaton/json',:charset=>'utf-8'
-	Log.debug "#{params.inspect}"
-	if TypeTwo.save_or_update(params,session[:login_id])
-		{message: "保存成功",error_type: "0"}.to_json
-	else
-		{message: "内部数据错误，请联系管理员",error_type: "-1"}.to_json
-	end
-end
 
 ################## 小类管理 ##################
 ################## 供应商管理 #################
@@ -116,7 +56,16 @@ end
 =begin
 	公共信息模块
 =end
-
+######## 获取下拉列表框########
+post "/get/:type/:fields/:query" do 
+	content_type 'applicaton/json',:charset=>'utf-8'
+	fields = "id,name"	#需要查询出来的字段 不需要查询时用nil
+	fields = params[:fields] unless params[:fields]=="nil"
+	queryHash = {} 			#查询参数 eg：“name=jiyaping” 不需要查询时用nil
+	queryHash = str_to_hash(params["query"]) unless params["query"]=="nil"
+	hash = eval(params[:type]).easyui_special_rows(fields)
+	hash.to_json
+end
 
 
 ########登录／退出########

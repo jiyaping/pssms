@@ -171,4 +171,15 @@ function InfoChange(id,value){
 	}
 }
 
+/*
+* 调试用 查看js的属性信息
+*/
+function ViewObject(obj){
+	str = "";
+	for(p in obj){
+		str=str + p + ":"+eval("obj."+p)+"\n";
+	}
+	alert(str);
+}
+
 

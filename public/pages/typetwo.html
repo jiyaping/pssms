@@ -8,29 +8,35 @@
             height:200,
             pageList:[13,20,50,100],
             striped:true,
-            url:"/typetwo",
+            url:"/TypeTwo/TypeOne=name",
             idField:"id",
             singleSelect:true,
             columns:[[
                 {field:'id',title:'key',rowspan:2,align:'center',editor:'numberbox',hidden:true},
                 {field:'type_no',title:'中类编号',width:120,rowspan:2,align:'center',editor:'text'},
-                {field:'type_one_id',title:'大类编号',width:120,rowspan:2,align:'center',
+                {field:'type_one_id',title:'fk1',rowspan:2,align:'center',editor:'numberbox',hidden:true},
+                {field:'typeone_name',title:'大类名称',width:120,rowspan:2,align:'center',
                     editor:{
                         type:"combobox",
                         options:{
                             valueField:"id",
                             textField:"name",
-                            url:"/get/TypeOne",
+                            url:"/get/TypeOne/nil",
                             panelHeight:"auto",
                             required:true,
                             missingMessage:"清选择权限",
                             onSelect:function(record){
-                                this.combobox("setValue",record.name)
+                                $('#dg').datagrid("getSelected").type_one_id=$(this).combobox("getValue");
+                                ViewObject($('#dg').datagrid("getSelected"));
+                            },
+                            onChange:function(newValue,oldValue){
+                                alert(newValue);
                             }
                         }
                      },
                     formatter:function(value,row,index){
-                        alert(row.name)
+                       //row.type_one_id = this.combobox("getValue");
+                       return value;
                     } 
                 },
                 {field:'name',title:'中类名称',width:250,rowspan:2,align:'left',editor:'text'},
@@ -100,7 +106,7 @@
             if(d){
             $.ajax({
                 type:"POST",
-                url:"/typetwo/delete",
+                url:"/TypeTwo/delete",
                 data:"id="+selected.id,
                 success:function(data){
                     if(data!=""){
@@ -128,8 +134,8 @@
             $.ajax({
             type:'POST',
             dataType:"json",
-            url:'/typetwo/save',
-            data:obj,
+            url:'/TypeTwo/save',
+            data:{"data":obj},
             success:function(data){
                 if(data.error_type=='-1'){
                     $.messager.alert('error',data.message,'error',function(){
@@ -170,7 +176,7 @@
         queryParams.queryWord = $('#qq').val();
         queryParams.queryType = $('#ss').val();
         $('#dg').datagrid({
-            url:'/typetwo'
+            url:'/TypeTwo'
         });
         $('#query').window('close');
     }

@@ -10,9 +10,31 @@ require_relative 'lib/ActiveRecord.rb'
 Dir['plugins/*.rb'].each { |plugin| require_relative plugin }  
 
 # Database connection.
+
+#Connection to sqlite3
+# ActiveRecord::Base.establish_connection(
+# 	:adapter=>"sqlite3",
+# 	:database=>"main.sqlite3"
+# )
+
+#Connection to mysql
+# ActiveRecord::Base.establish_connection(
+# 	:adapter => "mysql",
+# 	:host => "localhost",
+# 	:username => "root",
+# 	:password => "root",
+# 	:database => "sinatra"
+# )
+
+
+#Connection to postgresql
 ActiveRecord::Base.establish_connection(
-	:adapter=>"sqlite3",
-	:database=>"main.sqlite3"
+  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+  :host     => db.host,
+  :username => db.user,
+  :password => db.password,
+  :database => db.path[1..-1],
+  :encoding => 'utf8'
 )
 
 # Database models.

@@ -21,16 +21,20 @@ class ActiveRecord::Base
  	end
 
  	#返回指定rows的数组
-	def self.easyui_rows(pageNum,pageSize,params={})
+ 	# => page_num	当前页号 
+ 	# => page_size	每页大小 
+ 	# => params		查询条件
+ 	# => add_fields	额外需要添加的field	 eg:{"TypeOne"=>"name_s"}
+	def self.easyui_rows(page_num,page_size,params={},add_fields={})
 		keystr = build_query_str(params)
 		keyHash = build_query_hash(params)
-		limit = pageSize || 10
-		pageNum = pageNum || 1
-		offset = (pageNum.to_i-1) * pageSize.to_i
+		limit = page_size || 10
+		page_num = page_num || 1
+		offset = (page_num.to_i-1) * page_size.to_i
 		rows = []
 		#puts "#{limit} #{offset} #{keystr} #{keyHash}"
-		self.where(keystr,keyHash).limit(limit).offset(offset).each do |obj|
-			rows<<obj.attributes
+		self.where(keystr,keyHash).includes(add_fields.keys).limit(limit).offset(offset).each do |obj|
+			rows<<(obj.attributes.merge!(build_addition_fields(obj,add_fields)))
 		end
 
 		rows
@@ -49,6 +53,7 @@ class ActiveRecord::Base
 	end
 
 	private
+
 	#构造条件字符串
 	def self.build_query_str(params={})
 		result_str = ''
@@ -63,6 +68,21 @@ class ActiveRecord::Base
 	def self.build_query_hash(params={})
 		newhash = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }
 		newhash
+	end
+
+	#根据传入对象和addfields构造返回的hash
+	def self.build_addition_fields(obj,addfields={})
+		hash={}
+		addfields.each do |k,v|
+			hash[build_field_key(k,v)] = obj.send(k).send(v)
+		end
+		hash
+	end
+
+	#利用hash构造参数格式
+	#eg "TypeOne" "name_s" 返回 “typeone_name_s”
+	def self.build_field_key(key,value)
+		key.downcase<<"_"<<value
 	end
 
 	#添加而外信息
