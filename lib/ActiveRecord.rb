@@ -2,9 +2,10 @@
 
 class ActiveRecord::Base
 	#获取指定列信息返回
-	def self.easyui_special_rows(fields="id,name")
+	def self.easyui_special_rows(fields="id,name",params={},count=10)
+		keystr = build_query_str(params,"LIKE")
 		rows = []
-		self.select(fields).each do |obj|
+		self.where(keystr).limit(count).select(fields).each do |obj|
 			rows<<obj.attributes
 		end
 
@@ -24,8 +25,8 @@ class ActiveRecord::Base
  	# => page_num	当前页号 
  	# => page_size	每页大小 
  	# => params		查询条件
- 	# => add_fields	额外需要添加的field	 eg:{"TypeOne"=>"name_s"}
-	def self.easyui_rows(page_num,page_size,params={},add_fields={})
+ 	# => add_field	额外需要添加的field	 eg:{"TypeOne"=>"name_s"}
+	def self.easyui_rows(page_num,page_size,params={},add_fi={})
 		keystr = build_query_str(params)
 		keyHash = build_query_hash(params)
 		limit = page_size || 10
@@ -33,8 +34,8 @@ class ActiveRecord::Base
 		offset = (page_num.to_i-1) * page_size.to_i
 		rows = []
 		#puts "#{limit} #{offset} #{keystr} #{keyHash}"
-		self.where(keystr,keyHash).includes(add_fields.keys).limit(limit).offset(offset).each do |obj|
-			rows<<(obj.attributes.merge!(build_addition_fields(obj,add_fields)))
+		self.where(keystr,keyHash).includes(add_fi.keys).limit(limit).offset(offset).each do |obj|
+			rows<<(obj.attributes.merge!(build_addition_fields(obj,add_fi)))
 		end
 
 		rows
@@ -55,13 +56,21 @@ class ActiveRecord::Base
 	private
 
 	#构造条件字符串
-	def self.build_query_str(params={})
+	def self.build_query_str(params={},query_type="=")
 		result_str = ''
-		params.keys.each do |p|
-			result_str<<p.to_s<<" =:#{p.to_sym}"
-			result_str<<" and " if params.keys.last!=p
+		if query_type=="="
+			params.keys.each do |p|
+				result_str<<p.to_s<<" =:#{p.to_sym}"
+				result_str<<" and " if params.keys.last!=p
+			end
+		else
+			params.keys.each do |p|
+				result_str<<p.to_s<<" #{query_type} '%#{params[p]}%'"
+				result_str<<" and " if params.keys.last!=p
+			end
 		end
 		result_str
+
 	end
 
 	#构造值value哈希

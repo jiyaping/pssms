@@ -97,3 +97,33 @@ end
 if not TypeTwo.table_exists?
 	AddTypeTwo.up
 end
+
+#create TypeThree
+class AddTypeThree < ActiveRecord::Migration 
+	def self.up
+		create_table :type_threes do |t|
+			t.string :name
+			t.string :type_no
+			t.string :name_s
+			t.string :type_one_id
+			t.string :type_one_no
+			t.string :type_one_name
+			t.string :type_two_id
+			t.string :type_two_name
+			t.string :type_two_no
+			t.string :use_flag
+			t.string :add_id
+			t.string :add_date
+			t.string :upd_id
+			t.string :upd_date
+		end
+	end
+
+	def self.down
+		drop_table :type_threes
+	end
+end
+
+if not TypeThree.table_exists?
+	AddTypeThree.up
+end

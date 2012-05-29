@@ -1,4 +1,6 @@
 <script>
+    var if_call_change = true;
+    var type_one_id_edit;
     $(function(){
         $('#dg').datagrid({
             iconCls:"icon-ok",
@@ -21,23 +23,28 @@
                         options:{
                             valueField:"id",
                             textField:"name",
-                            url:"/get/TypeOne/nil",
+                            url:"/get/TypeOne/nil/nil/nil",
                             panelHeight:"auto",
                             required:true,
-                            missingMessage:"清选择权限",
+                            missingMessage:"清选择中类",
                             onSelect:function(record){
-                                $('#dg').datagrid("getSelected").type_one_id=$(this).combobox("getValue");
-                                ViewObject($('#dg').datagrid("getSelected"));
+                                //alert("onselect");
+                                //ViewObject(type_one_id_edit);
+                                alert(1);
+                                type_one_id_edit.target.numberbox("setValue",record.id);
+                                alert(2);
+                                $(this).combobox("setValue",record.name);
+                                if_call_change = false;
                             },
                             onChange:function(newValue,oldValue){
-                                alert(newValue);
+                                if(if_call_change){
+                                    $(this).combobox("reload","/get/TypeOne/nil/name="+newValue+"/nil");
+                                }else{
+                                    if_call_change = true;
+                                }
                             }
                         }
-                     },
-                    formatter:function(value,row,index){
-                       //row.type_one_id = this.combobox("getValue");
-                       return value;
-                    } 
+                     }
                 },
                 {field:'name',title:'中类名称',width:250,rowspan:2,align:'left',editor:'text'},
                 {field:'name_s',title:'中类简称',width:100,rowspan:2,align:'center',editor:'text'},
@@ -94,6 +101,8 @@
     var count = 0;
     function editRow(index){
         $('#dg').datagrid('beginEdit',index);
+        type_one_id_edit = $('#dg').datagrid('getEditors',index)[2];
+        ViewObject(type_one_id_edit);
     }
     function deleteRow(index){
         var selected = $('#dg').datagrid('getSelected',index);
@@ -163,6 +172,7 @@
                 type_one_id:'',
                 name:'',
                 name_s:'',
+                typeone_name:'',
                 use_flag:'0'
             });
             var lastIndex = $('#dg').datagrid('getRows').length-1;
@@ -176,7 +186,7 @@
         queryParams.queryWord = $('#qq').val();
         queryParams.queryType = $('#ss').val();
         $('#dg').datagrid({
-            url:'/TypeTwo'
+            url:'/TypeTwo/TypeOne=name'
         });
         $('#query').window('close');
     }

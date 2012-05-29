@@ -9,30 +9,6 @@ end
 =end
 
 ################## 基础信息模块 ##################
-post "/:type/:fields" do
-	logger_user(request.path,params.inspect)
-	Log.debug "#{params.inspect}"
-	content_type 'applicaton/json'
-	total = session[:total] || eval(params["type"]).count
-	queryHash = {} 			#查询参数
-	add_fields = {}			#额外添加的field
-	add_fields = str_to_hash(params["fields"]) unless params["fields"]=="nil" 
-	queryHash = {params["queryType"]=>params["queryWord"]} if !params["queryType"].nil? and params["queryWord"]!=""
-	Log.debug "#{params[:type]} #{params[:page]} #{params["rows"]} #{queryHash} #{add_fields}"
-	return_hash={:total=>total,:rows=>
-		eval(params[:type]).easyui_rows(params["page"],params["rows"],queryHash,add_fields)}
-	Log.debug "#{return_hash}"
-	return_hash.to_json
-end
-
-post "/:type/delete" do
-	logger_user(request.path,params.inspect)
-
-	content_type 'text/plain',:charset=>'utf-8'
-	Log.debug "#{params.inspect}"
-	"delete failed !" if !eval(params[:type]).find(params["id"]).destroy
-end
-
 post "/:type/save" do
 	logger_user(request.path,params.inspect)
 
@@ -45,28 +21,45 @@ post "/:type/save" do
 	end
 end
 
+post "/:type/:fields" do
+	logger_user(request.path,params.inspect)
+	Log.debug "#{params.inspect}"
+	content_type 'applicaton/json'
+	total = session[:total] || eval(params["type"]).count
+	queryHash = {} 			#查询参数
+	add_fields = {}			#额外添加的field
+	add_fields = str_to_hash(params["fields"]) unless params["fields"]=="nil" 
+	queryHash = {params["queryType"]=>params["queryWord"]} if !params["queryType"].nil? and params["queryWord"]!=""
+	Log.debug "#{params[:type]} #{params[:page]} #{params["rows"]} #{queryHash} #{add_fields}"
+	return_hash={:total=>total,:rows=>
+		eval(params[:type]).easyui_rows(params["page"],params["rows"],queryHash,add_fields)}
+	return_hash.to_json
+end
 
+post "/:type/delete" do
+	logger_user(request.path,params.inspect)
 
-################## 小类管理 ##################
-################## 供应商管理 #################
-################## 商品管理 ##################
-
-
+	content_type 'text/plain',:charset=>'utf-8'
+	Log.debug "#{params.inspect}"
+	"delete failed !" if !eval(params[:type]).find(params["id"]).destroy
+end
 
 =begin
 	公共信息模块
 =end
 ######## 获取下拉列表框########
-post "/get/:type/:fields/:query" do 
+post "/get/:type/:fields/:query/:count" do 
 	content_type 'applicaton/json',:charset=>'utf-8'
-	fields = "id,name"	#需要查询出来的字段 不需要查询时用nil
+	fields = "id,name"		#需要查询出来的字段 不需要查询时用nil
 	fields = params[:fields] unless params[:fields]=="nil"
 	queryHash = {} 			#查询参数 eg：“name=jiyaping” 不需要查询时用nil
 	queryHash = str_to_hash(params["query"]) unless params["query"]=="nil"
-	hash = eval(params[:type]).easyui_special_rows(fields)
+	count = 10
+	count = params[:count] unless params[:count]=="nil" #返回记录数量 nil代表默认是10
+	Log.debug "#{fields} #{queryHash} #{count}"
+	hash = eval(params[:type]).easyui_special_rows(fields,queryHash,count)
 	hash.to_json
 end
-
 
 ########登录／退出########
 get "/login" do 

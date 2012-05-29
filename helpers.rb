@@ -68,8 +68,10 @@ def str_to_hash(str,sep_first="&",sep_second="=")
   hash = {}
   str.split(sep_first).each do |item|
     k,v = item.split(sep_second)
-    hash[k] = v
+    if !v.nil?
+      hash[k] = v.strip 
+    end
   end
   hash
-end  
+end
 
