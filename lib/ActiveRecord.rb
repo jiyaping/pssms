@@ -33,7 +33,7 @@ class ActiveRecord::Base
 		page_num = page_num || 1
 		offset = (page_num.to_i-1) * page_size.to_i
 		rows = []
-		#puts "#{limit} #{offset} #{keystr} #{keyHash}"
+		#puts "l:#{limit} o:#{offset} ks:#{keystr} kh:#{keyHash}"
 		self.where(keystr,keyHash).includes(add_fi.keys).limit(limit).offset(offset).each do |obj|
 			rows<<(obj.attributes.merge!(build_addition_fields(obj,add_fi)))
 		end
@@ -83,7 +83,7 @@ class ActiveRecord::Base
 	def self.build_addition_fields(obj,addfields={})
 		hash={}
 		addfields.each do |k,v|
-			hash[build_field_key(k,v)] = obj.send(k).send(v)
+			hash[build_field_key(k,v)] = obj.send(k).send(v) unless obj.nil?
 		end
 		hash
 	end

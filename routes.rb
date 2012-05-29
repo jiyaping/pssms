@@ -58,6 +58,7 @@ post "/get/:type/:fields/:query/:count" do
 	count = params[:count] unless params[:count]=="nil" #返回记录数量 nil代表默认是10
 	Log.debug "#{fields} #{queryHash} #{count}"
 	hash = eval(params[:type]).easyui_special_rows(fields,queryHash,count)
+	Log.debug "#{hash}"
 	hash.to_json
 end
 

@@ -105,10 +105,10 @@ class AddTypeThree < ActiveRecord::Migration
 			t.string :name
 			t.string :type_no
 			t.string :name_s
-			t.string :type_one_id
+			t.integer :type_one_id
 			t.string :type_one_no
 			t.string :type_one_name
-			t.string :type_two_id
+			t.integer :type_two_id
 			t.string :type_two_name
 			t.string :type_two_no
 			t.string :use_flag

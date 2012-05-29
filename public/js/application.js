@@ -182,4 +182,12 @@ function ViewObject(obj){
 	alert(str);
 }
 
+function ViewAttr(obj){
+	str = "";
+	for(p in obj){
+		str=str + p +"\n";
+	}
+	alert(str);
+}
+
 

@@ -1,7 +1,17 @@
 <script>
-    var if_call_change = true;
     var type_one_id_edit;
     $(function(){
+        var myKeyHandler = $.extend({},$.fn.combobox.defaults.keyHandler,{
+            enter: function(){
+                var q = $(this).combobox("getText");
+                $(this).combobox("reload","/get/TypeOne/nil/name="+q+"/nil");
+            },
+            query:function(q){
+                $(this).combobox("setValue",q);
+                $(this).combobox("reload","/get/TypeOne/nil/name="+q+"/nil");
+            }
+        });
+
         $('#dg').datagrid({
             iconCls:"icon-ok",
             fit:true,
@@ -26,22 +36,13 @@
                             url:"/get/TypeOne/nil/nil/nil",
                             panelHeight:"auto",
                             required:true,
+                            keyHandler: myKeyHandler,
                             missingMessage:"清选择中类",
                             onSelect:function(record){
                                 //alert("onselect");
                                 //ViewObject(type_one_id_edit);
-                                alert(1);
                                 type_one_id_edit.target.numberbox("setValue",record.id);
-                                alert(2);
                                 $(this).combobox("setValue",record.name);
-                                if_call_change = false;
-                            },
-                            onChange:function(newValue,oldValue){
-                                if(if_call_change){
-                                    $(this).combobox("reload","/get/TypeOne/nil/name="+newValue+"/nil");
-                                }else{
-                                    if_call_change = true;
-                                }
                             }
                         }
                      }
@@ -102,7 +103,6 @@
     function editRow(index){
         $('#dg').datagrid('beginEdit',index);
         type_one_id_edit = $('#dg').datagrid('getEditors',index)[2];
-        ViewObject(type_one_id_edit);
     }
     function deleteRow(index){
         var selected = $('#dg').datagrid('getSelected',index);
@@ -176,8 +176,10 @@
                 use_flag:'0'
             });
             var lastIndex = $('#dg').datagrid('getRows').length-1;
+            $('#dg').datagrid('endEdit', lastIndex);
             $('#dg').datagrid('selectRow', lastIndex);
             $('#dg').datagrid('beginEdit', lastIndex);
+            type_one_id_edit = $('#dg').datagrid('getEditors',lastIndex)[2];
         } 
     }
     

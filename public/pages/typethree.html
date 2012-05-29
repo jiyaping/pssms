@@ -1,9 +1,39 @@
 <script>
-    var if_call_change1 = true;
-    var if_call_change2 = true;
+    
+    var if_call_change = false;
+    var type_one_no_edit;
     var type_one_id_edit;
     var type_two_id_edit;
+    var type_two_no_edit;
+    var type_two_name_combobox;
     $(function(){
+        var type_one_name_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
+            enter: function(){
+                q = $(this).combobox("getText");
+                $(this).combobox("reload","/get/TypeOne/id,name,type_no/name="+q+"&/nil");
+            },
+            query:function(q){
+                $(this).combobox("setValue",q);
+                $(this).combobox("reload","/get/TypeOne/id,name,type_no/name="+q+"&/nil");
+            }
+        });
+        var type_two_name_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
+            enter: function(){
+                q = $(this).combobox("getText");
+                temp_id = type_one_id_edit.target.numberbox("getValue");
+                $(this).combobox("reload","/get/TypeTwo/id,name,type_no/type_one_id="+temp_id+"&name="+q+"/nil"); 
+            },
+            query:function(q){
+                if(if_call_change){
+                    $(this).combobox("setValue",q);
+                    temp_id = type_one_id_edit.target.numberbox("getValue");
+                    $(this).combobox("reload","/get/TypeTwo/id,name,type_no/type_one_id="+temp_id+"&name="+q+"/nil"); 
+                }else{
+                    $.messager.alert('提示','请选择大类');
+                }
+            }
+        });
+
         $('#dg').datagrid({
             iconCls:"icon-ok",
             fit:true,
@@ -18,46 +48,48 @@
             columns:[[
                 {field:'id',title:'key',rowspan:2,align:'center',hidden:true},
                 {field:'type_no',title:'中类编号',width:120,rowspan:2,align:'center',editor:'text'},
-                {field:'type_one_id',title:'fk1',rowspan:2,align:'center',editor:'text',hidden:true},
+                {field:'type_one_id',title:'fk1',rowspan:2,align:'center',editor:'numberbox',hidden:true},
                 {field:'type_one_no',title:'ex_fk1',rowspan:2,align:'center',editor:'text',hidden:true},
-                {field:'typeone_name',title:'大类名称',width:120,rowspan:2,align:'center',
+                {field:'type_one_name',title:'大类名称',width:120,rowspan:2,align:'center',
                     editor:{
                         type:"combobox",
                         options:{
                             valueField:"id",
                             textField:"name",
-                            url:"/get/TypeOne/nil/nil/nil",
+                            url:"/get/TypeOne/id,name,type_no/nil/nil",
                             panelHeight:"auto",
                             required:true,
+                            keyHandler:type_one_name_handler,
                             missingMessage:"清选择大类",
                             onSelect:function(record){
-                                $('#dg').datagrid("getSelected").type_one_id=$(this).combobox("getValue");
-                                //ViewObject($('#dg').datagrid("getSelected"));
-                            },
-                            onChange:function(newValue,oldValue){
-                                $(this).combobox("reload","/get/TypeOne/id,name,type_no/name="+newValue+"&/nil");
+                                type_one_id_edit.target.numberbox("setValue",record.id);
+                                type_one_no_edit.target.text("setValue",record.type_no);
+                                $(this).combobox("setValue",record.name);
+                                //ViewObject(type_two_name_combobox);
+                                type_two_name_combobox.target.combobox('reload','/get/TypeTwo/id,name,type_no/type_one_id='+record.id+'/nil');
+                                if_call_change = true;
                             }
                         }
                      }
                 },
-                {field:'type_two_id',title:'fk2',rowspan:2,align:'center',editor:'text',hidden:true},
+                {field:'type_two_id',title:'fk2',rowspan:2,align:'center',editor:'numberbox',hidden:true},
                 {field:'type_two_no',title:'ex_fk2',rowspan:2,align:'center',editor:'text',hidden:true},
-                {field:'typetwo_name',title:'中类名称',width:120,rowspan:2,align:'center',
+                {field:'type_two_name',title:'中类名称',width:120,rowspan:2,align:'center',
                     editor:{
                         type:"combobox",
                         options:{
                             valueField:"id",
                             textField:"name",
-                            url:"/get/TypeTwo/nil/nil/nil",
+                            url:"/get/TypeTwo/id,name,type_no/nil/nil",
                             panelHeight:"auto",
                             required:true,
+                            keyHandler:type_two_name_handler,
                             missingMessage:"清选择中类",
                             onSelect:function(record){
-                                $('#dg').datagrid("getSelected").type_two_id=$(this).combobox("getValue");
+                                type_two_id_edit.target.numberbox("setValue",record.id);
+                                type_two_no_edit.target.text("setValue",record.type_no);
+                                $(this).combobox("setValue",record.name);
                                 //ViewObject($('#dg').datagrid("getSelected"));
-                            },
-                            onChange:function(newValue,oldValue){
-                                $(this).combobox("reload","/get/TypeTwo/id,name,type_no/name="+newValue+"/nil")
                             }
                         }
                      }
@@ -117,7 +149,12 @@
     var count = 0;
     function editRow(index){
         $('#dg').datagrid('beginEdit',index);
-
+        temp_arr = $('#dg').datagrid("getEditors",index);
+        type_one_id_edit = temp_arr[1];
+        type_one_no_edit = temp_arr[2];
+        type_two_id_edit = temp_arr[4];
+        type_two_no_edit = temp_arr[5];
+        type_two_name_combobox = temp_arr[6];
     }
     function deleteRow(index){
         var selected = $('#dg').datagrid('getSelected',index);
@@ -153,12 +190,13 @@
         obj.name = select.name;
         obj.type_one_id = select.type_one_id;
         obj.type_one_no = select.type_one_no;
-        obj.type_one_name = select.typeone_name;
+        obj.type_one_name = select.type_one_name;
         obj.type_two_id = select.type_two_id;
         obj.type_two_no = select.type_two_no;
-        obj.type_two_name = select.typeone_name;
+        obj.type_two_name = select.type_two_name;
         obj.name_s = select.name_s;
         obj.use_flag = select.use_flag;
+        ViewObject(obj);
         if(select){
             $.ajax({
             type:'POST',
@@ -191,17 +229,24 @@
                 type_no:'',
                 type_one_id:'',
                 type_one_no:'',
-                typeone_name:'',
+                type_one_name:'',
                 type_two_id:'',
                 type_two_no:'',
-                typetwo_name:'',
+                type_two_name:'',
                 name:'',
                 name_s:'',
                 use_flag:'0'
             });
             var lastIndex = $('#dg').datagrid('getRows').length-1;
+            $('#dg').datagrid('endEdit', lastIndex);
             $('#dg').datagrid('selectRow', lastIndex);
             $('#dg').datagrid('beginEdit', lastIndex);
+            temp_arr = $('#dg').datagrid("getEditors",lastIndex);
+            type_one_id_edit = temp_arr[1];
+            type_one_no_edit = temp_arr[2];
+            type_two_id_edit = temp_arr[4];
+            type_two_no_edit = temp_arr[5];
+            type_two_name_combobox = temp_arr[6];
         } 
     }
     
