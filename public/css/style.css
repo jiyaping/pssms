@@ -54,6 +54,7 @@ li{
 
 #nav li{
 	padding:5px 15px;
+	cursor:pointer;
 }
 
 #nav div{

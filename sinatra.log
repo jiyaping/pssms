@@ -1,0 +1,59 @@
+I, [2012-05-29T19:00:55.405494 #6923]  INFO -- : jiyaping  /Supplier/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Supplier", "nil"], "type"=>"Supplier", "fields"=>"nil"}
+D, [2012-05-29T19:00:55.405728 #6923] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Supplier", "nil"], "type"=>"Supplier", "fields"=>"nil"}
+D, [2012-05-29T19:00:55.410011 #6923] DEBUG -- : Supplier 1 13 {} {}
+I, [2012-05-29T19:02:10.762382 #6928]  INFO -- : jiyaping  /Supplier/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Supplier", "nil"], "type"=>"Supplier", "fields"=>"nil"}
+D, [2012-05-29T19:02:10.762840 #6928] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Supplier", "nil"], "type"=>"Supplier", "fields"=>"nil"}
+D, [2012-05-29T19:02:10.767061 #6928] DEBUG -- : Supplier 1 13 {} {}
+I, [2012-05-29T19:02:44.136849 #6932]  INFO -- : jiyaping  /Supplier/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Supplier", "nil"], "type"=>"Supplier", "fields"=>"nil"}
+D, [2012-05-29T19:02:44.137058 #6932] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Supplier", "nil"], "type"=>"Supplier", "fields"=>"nil"}
+D, [2012-05-29T19:02:44.141017 #6932] DEBUG -- : Supplier 1 13 {} {}
+I, [2012-05-29T19:41:30.762146 #7172]  INFO -- : jiyaping  /Shevle/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T19:41:30.762358 #7172] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T19:41:30.766492 #7172] DEBUG -- : Shevle 1 13 {} {}
+I, [2012-05-29T19:43:48.353748 #7180]  INFO -- : jiyaping  /Shevle/save  {"data"=>{"id"=>"", "name"=>"食品货架", "type"=>"00", "no"=>"SH001", "spec"=>"5*2", "remark"=>"存放一般食品的货架", "use_flag"=>"0"}, "splat"=>[], "captures"=>["Shevle"], "type"=>"Shevle"}
+D, [2012-05-29T19:43:48.354007 #7180] DEBUG -- : {"data"=>{"id"=>"", "name"=>"食品货架", "type"=>"00", "no"=>"SH001", "spec"=>"5*2", "remark"=>"存放一般食品的货架", "use_flag"=>"0"}, "splat"=>[], "captures"=>["Shevle"], "type"=>"Shevle"}
+D, [2012-05-29T19:43:48.354204 #7180] DEBUG -- : {"id"=>"", "name"=>"食品货架", "type"=>"00", "no"=>"SH001", "spec"=>"5*2", "remark"=>"存放一般食品的货架", "use_flag"=>"0", "add_id"=>"jiyaping", "add_date"=>"2012-05-29 19:43:48"}
+I, [2012-05-29T19:58:43.105466 #7223]  INFO -- : jiyaping  /Shevle/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T19:58:43.105680 #7223] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T19:58:43.109580 #7223] DEBUG -- : Shevle 1 13 {} {}
+I, [2012-05-29T20:00:41.732113 #7233]  INFO -- : jiyaping  /Shevle/save  {"data"=>{"id"=>"1", "name"=>"食品货架", "type"=>"00", "no"=>"SH001", "spec"=>"5*2", "remark"=>"存放一般食品的货架", "use_flag"=>"0"}, "splat"=>[], "captures"=>["Shevle"], "type"=>"Shevle"}
+D, [2012-05-29T20:00:41.732370 #7233] DEBUG -- : {"data"=>{"id"=>"1", "name"=>"食品货架", "type"=>"00", "no"=>"SH001", "spec"=>"5*2", "remark"=>"存放一般食品的货架", "use_flag"=>"0"}, "splat"=>[], "captures"=>["Shevle"], "type"=>"Shevle"}
+I, [2012-05-29T20:04:17.560376 #7254]  INFO -- : jiyaping  /Shevle/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:04:17.560801 #7254] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:04:17.565273 #7254] DEBUG -- : Shevle 1 13 {} {}
+I, [2012-05-29T20:05:02.120939 #7260]  INFO -- : jiyaping  /Shevle/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:05:02.121157 #7260] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:05:02.125089 #7260] DEBUG -- : Shevle 1 13 {} {}
+I, [2012-05-29T20:07:56.034253 #7275]  INFO -- : jiyaping  /Shevle/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:07:56.034472 #7275] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:07:56.038862 #7275] DEBUG -- : Shevle 1 13 {} {}
+I, [2012-05-29T20:09:36.694513 #7286]  INFO -- : jiyaping  /Shevle/save  {"data"=>{"id"=>"", "name"=>"食品货架", "shevle_type"=>"00", "no"=>"SH0001", "spec"=>"7*1.5*2", "remark"=>"存放普通食品的货架", "use_flag"=>"0"}, "splat"=>[], "captures"=>["Shevle"], "type"=>"Shevle"}
+D, [2012-05-29T20:09:36.694797 #7286] DEBUG -- : {"data"=>{"id"=>"", "name"=>"食品货架", "shevle_type"=>"00", "no"=>"SH0001", "spec"=>"7*1.5*2", "remark"=>"存放普通食品的货架", "use_flag"=>"0"}, "splat"=>[], "captures"=>["Shevle"], "type"=>"Shevle"}
+D, [2012-05-29T20:09:36.695002 #7286] DEBUG -- : {"id"=>"", "name"=>"食品货架", "shevle_type"=>"00", "no"=>"SH0001", "spec"=>"7*1.5*2", "remark"=>"存放普通食品的货架", "use_flag"=>"0", "add_id"=>"jiyaping", "add_date"=>"2012-05-29 20:09:36"}
+I, [2012-05-29T20:11:28.509743 #7303]  INFO -- : jiyaping  /Shevle/save  {"data"=>{"id"=>"", "name"=>"食品货架", "shevle_type"=>"00", "no"=>"SH0001", "spec"=>"7*1.5*2", "remark"=>"存放普通食品的货架", "use_flag"=>"0"}, "splat"=>[], "captures"=>["Shevle"], "type"=>"Shevle"}
+D, [2012-05-29T20:11:28.510021 #7303] DEBUG -- : {"data"=>{"id"=>"", "name"=>"食品货架", "shevle_type"=>"00", "no"=>"SH0001", "spec"=>"7*1.5*2", "remark"=>"存放普通食品的货架", "use_flag"=>"0"}, "splat"=>[], "captures"=>["Shevle"], "type"=>"Shevle"}
+D, [2012-05-29T20:11:28.510223 #7303] DEBUG -- : {"id"=>"", "name"=>"食品货架", "shevle_type"=>"00", "no"=>"SH0001", "spec"=>"7*1.5*2", "remark"=>"存放普通食品的货架", "use_flag"=>"0", "add_id"=>"jiyaping", "add_date"=>"2012-05-29 20:11:28"}
+I, [2012-05-29T20:11:36.035056 #7307]  INFO -- : jiyaping  /Shevle/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:11:36.035271 #7307] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:11:36.039330 #7307] DEBUG -- : Shevle 1 13 {} {}
+I, [2012-05-29T20:11:59.351215 #7312]  INFO -- : jiyaping  /Shevle/nil  {"queryWord"=>"0", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:11:59.351703 #7312] DEBUG -- : {"queryWord"=>"0", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:11:59.356008 #7312] DEBUG -- : Shevle 1 13 {"no"=>"0"} {}
+I, [2012-05-29T20:12:06.114478 #7317]  INFO -- : jiyaping  /Shevle/nil  {"queryWord"=>"SH001", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:12:06.114712 #7317] DEBUG -- : {"queryWord"=>"SH001", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:12:06.118716 #7317] DEBUG -- : Shevle 1 13 {"no"=>"SH001"} {}
+I, [2012-05-29T20:12:10.901316 #7321]  INFO -- : jiyaping  /Shevle/nil  {"queryWord"=>"", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:12:10.901535 #7321] DEBUG -- : {"queryWord"=>"", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:12:10.905399 #7321] DEBUG -- : Shevle 1 13 {} {}
+I, [2012-05-29T20:12:21.563325 #7325]  INFO -- : jiyaping  /Shevle/nil  {"queryWord"=>"SH0001", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:12:21.563586 #7325] DEBUG -- : {"queryWord"=>"SH0001", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:12:21.567685 #7325] DEBUG -- : Shevle 1 13 {"no"=>"SH0001"} {}
+I, [2012-05-29T20:12:27.905418 #7329]  INFO -- : jiyaping  /Shevle/nil  {"queryWord"=>"", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:12:27.905821 #7329] DEBUG -- : {"queryWord"=>"", "queryType"=>"no", "page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["Shevle", "nil"], "type"=>"Shevle", "fields"=>"nil"}
+D, [2012-05-29T20:12:27.910554 #7329] DEBUG -- : Shevle 1 13 {} {}
+I, [2012-05-29T20:13:01.750058 #7338]  INFO -- : jiyaping  /TypeTwo/TypeOne=name  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["TypeTwo", "TypeOne=name"], "type"=>"TypeTwo", "fields"=>"TypeOne=name"}
+D, [2012-05-29T20:13:01.750462 #7338] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["TypeTwo", "TypeOne=name"], "type"=>"TypeTwo", "fields"=>"TypeOne=name"}
+D, [2012-05-29T20:13:01.755175 #7338] DEBUG -- : TypeTwo 1 13 {} {"TypeOne"=>"name"}
+I, [2012-05-29T20:13:03.420177 #7342]  INFO -- : jiyaping  /TypeOne/nil  {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["TypeOne", "nil"], "type"=>"TypeOne", "fields"=>"nil"}
+D, [2012-05-29T20:13:03.420397 #7342] DEBUG -- : {"page"=>"1", "rows"=>"13", "splat"=>[], "captures"=>["TypeOne", "nil"], "type"=>"TypeOne", "fields"=>"nil"}
+D, [2012-05-29T20:13:03.424805 #7342] DEBUG -- : TypeOne 1 13 {} {}

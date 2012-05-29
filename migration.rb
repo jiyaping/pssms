@@ -127,3 +127,59 @@ end
 if not TypeThree.table_exists?
 	AddTypeThree.up
 end
+
+#create suppliers
+class AddSupplier < ActiveRecord::Migration 
+	def self.up
+		create_table :suppliers do |t|
+			t.string :name
+			t.string :name_s
+			t.string :address
+			t.string :telphone
+			t.string :ceilphone
+			t.string :fax
+			t.string :remark
+			t.string :supp_flag	
+			t.string :use_flag
+			t.string :add_id
+			t.string :add_date
+			t.string :upd_id
+			t.string :upd_date
+		end
+	end
+
+	def self.down
+		drop_table :suppliers
+	end
+end
+
+if not Supplier.table_exists?
+	AddSupplier.up
+end
+
+
+#create shevles
+class AddShevle < ActiveRecord::Migration 
+	def self.up
+		create_table :shevles do |t|
+			t.string :name
+			t.string :no
+			t.string :shevle_type
+			t.string :remark
+			t.string :spec
+			t.string :use_flag
+			t.string :add_id
+			t.string :add_date
+			t.string :upd_id
+			t.string :upd_date
+		end
+	end
+
+	def self.down
+		drop_table :shevles
+	end
+end
+
+if not Shevle.table_exists?
+	AddShevle.up
+end

@@ -33,20 +33,7 @@
 			$('#tt').tabs('add',{
 				title:pTitle,
 				href:pURL,
-				closable:true,
-				tools:[{
-					iconCls:'icon-mini-refresh',
-					handler:function(){
-						var tab = $('#tt').tabs('getSelected');
-						alert(tab);
-						$("#tt").tabs("update",{
-							tab:tab,
-							options:{
-								href:pURL
-							}
-						})
-					}
-				}]
+				closable:true
 			});
 		}
 
@@ -107,7 +94,7 @@
 				<li><a href="">库存履历查询</a></li>
 			</div>
 			<div title="货架管理">
-				<li><a href="">货架基本信息管理</a></li>
+				<li onclick="javascript:addTab('供应商管理','pages/shevle.html')"><a href="javascript:void(0);">货架基本信息管理</a></li>
 				<li><a href="">货架商品信息维护</a></li>
 				<li><a href="">商品上架</a></li>
 				<li><a href="">商品下架</a></li>
@@ -122,7 +109,7 @@
 				<li><a href="">支付履历管理</a></li>
 			</div>
 			<div title="系统功能"  selected="true">
-				<li><a href="">供应商信息管理</a></li>
+				<li onclick="javascript:addTab('供应商管理','pages/supplier.html');return false;"><a href="javascript:void(0);">供应商信息管理</a></li>
 				<li onclick="javascript:addTab('用户管理','pages/users.html');return false;"><a href="javascript:void(0);" >系统用户管理</a></li>
 				<li onclick="javascript:addTab('商品大类管理','pages/typeone.html');return false;"><a href="javascript:void(0);">商品大类管理</a></li>
 				<li onclick="javascript:addTab('商品中类管理','pages/typetwo.html');return false;"><a href="javascript:void(0);">商品中类管理</a></li>

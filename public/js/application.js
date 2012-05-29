@@ -97,10 +97,14 @@ function InfoChange(id,value){
 	//6代表货架类型(00:普通货架 01:柜台 02:冷藏柜 03:其他)
 	if(id==6){
 		switch(value){
-			case "0":
-				return "入库";
-			case "1":
-				return "退库";
+			case "00":
+				return "普通货架";
+			case "01":
+				return "柜台";
+			case "02":
+				return "冷藏柜";
+			case "03":
+				return "其他";
 			default:
 				return "";
 		}
