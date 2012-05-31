@@ -1,18 +1,13 @@
 <script>
-    var type_one_id_edit;
-    $(function(){
-        var myKeyHandler = $.extend({},$.fn.combobox.defaults.keyHandler,{
-            enter: function(){
-                var q = $(this).combobox("getText");
-                $(this).combobox("reload","/get/TypeOne/nil/name="+q+"/nil");
-            },
-            query:function(q){
-                $(this).combobox("setValue",q);
-                $(this).combobox("reload","/get/TypeOne/nil/name="+q+"/nil");
-            }
-        });
+	$(function(){
+        var shevle_type = [
+            {value:"00",name:"普通货架"},
+            {value:"01",name:"柜台"},
+            {value:"02",name:"冷藏柜"},
+            {value:"03",name:"其他"}
+        ];
 
-        $('#dg').datagrid({
+		$('#dg').datagrid({
             iconCls:"icon-ok",
             fit:true,
             loadMsg:'数据加载中请稍后……',
@@ -20,34 +15,32 @@
             height:200,
             pageList:[13,20,50,100],
             striped:true,
-            url:"/TypeTwo/TypeOne=name",
+            url:"/Shevle/nil",
             idField:"id",
             singleSelect:true,
             columns:[[
                 {field:'id',title:'key',rowspan:2,align:'center',editor:'numberbox',hidden:true},
-                {field:'type_no',title:'中类编号',width:120,rowspan:2,align:'center',editor:'text'},
-                {field:'type_one_id',title:'fk1',rowspan:2,align:'center',editor:'numberbox',hidden:true},
-                {field:'typeone_name',title:'大类名称',width:120,rowspan:2,align:'center',
+                {field:'no',title:'编号',width:80,rowspan:2,align:'center',editor:'text'},
+                {field:'name',title:'名称',width:200,rowspan:2,align:'center',editor:'text'},
+                {field:'shevle_type',title:'类型',width:80,rowspan:2,align:'center',
                     editor:{
-                        type:"combobox",
+                        type:'combobox',
                         options:{
-                            valueField:"id",
+                            valueField:"value",
                             textField:"name",
-                            url:"/get/TypeOne/nil/nil/nil",
+                            data:shevle_type,
                             panelHeight:"auto",
                             required:true,
-                            keyHandler: myKeyHandler,
-                            missingMessage:"清选择中类",
-                            onSelect:function(record){
-                                type_one_id_edit.target.numberbox("setValue",record.id);
-                                $(this).combobox("setValue",record.name);
-                            }
+                            missingMessage:"清选择权限"
                         }
-                     }
+                    },
+                    formatter:function(value,row,index){
+                        return InfoChange(6,value);
+                    }
                 },
-                {field:'name',title:'中类名称',width:250,rowspan:2,align:'left',editor:'text'},
-                {field:'name_s',title:'中类简称',width:100,rowspan:2,align:'center',editor:'text'},
-                {field:'operator',title:'',width:70,rowspan:2,align:'center',
+                {field:'spec',title:'规格',width:70,rowspan:2,align:'center',editor:'text'},
+                {field:'remark',title:'备注',width:350,rowspan:2,align:'center',editor:'text'},
+                {field:'operator',title:'操作列',width:70,rowspan:2,align:'center',
                     formatter:function(value,row,index){
                         if(row.editing){
                             var s ='<a href="javascript:void(0);" onclick="saveRow('+index+')" style="text-decoration: none;color: #800080;">保存</a>  ';
@@ -95,12 +88,11 @@
                 $('#dg').datagrid('refreshRow',index);
                 count--;
             }
-        });
-    });
+		});
+	});
     var count = 0;
     function editRow(index){
         $('#dg').datagrid('beginEdit',index);
-        type_one_id_edit = $('#dg').datagrid('getEditors',index)[2];
     }
     function deleteRow(index){
         var selected = $('#dg').datagrid('getSelected',index);
@@ -113,7 +105,7 @@
             if(d){
             $.ajax({
                 type:"POST",
-                url:"/TypeTwo/delete",
+                url:"/Shevle/delete",
                 data:"id="+selected.id,
                 success:function(data){
                     if(data!=""){
@@ -129,19 +121,23 @@
     }
     function saveRow(index){
         $('#dg').datagrid('endEdit',index);
+        /*
+         * 将数据保存到数据库
+         * */
         var select = $('#dg').datagrid('getSelected');
-        var obj ={};
+        var obj ={}; //将信息保存在数组中
         obj.id= select.id;
-        obj.type_no= select.type_no;
         obj.name = select.name;
-        obj.type_one_id = select.type_one_id;
-        obj.name_s = select.name_s;
+        obj.shevle_type = select.shevle_type;
+        obj.no = select.no;
+        obj.spec = select.spec;
+        obj.remark = select.remark;
         obj.use_flag = select.use_flag;
         if(select){
             $.ajax({
             type:'POST',
             dataType:"json",
-            url:'/TypeTwo/save',
+            url:'/Shevle/save',
             data:{"data":obj},
             success:function(data){
                 if(data.error_type=='-1'){
@@ -166,18 +162,16 @@
             $('#dg').datagrid('endEdit', lastIndex);
             $('#dg').datagrid('appendRow',{
                 id:'',
-                type_no:'',
-                type_one_id:'',
                 name:'',
-                name_s:'',
-                typeone_name:'',
+                shevle_type:'',
+                no:'',
+                spec:'',
+                remark:'',
                 use_flag:'0'
             });
             var lastIndex = $('#dg').datagrid('getRows').length-1;
-            $('#dg').datagrid('endEdit', lastIndex);
             $('#dg').datagrid('selectRow', lastIndex);
             $('#dg').datagrid('beginEdit', lastIndex);
-            type_one_id_edit = $('#dg').datagrid('getEditors',lastIndex)[2];
         } 
     }
     
@@ -186,7 +180,7 @@
         queryParams.queryWord = $('#qq').val();
         queryParams.queryType = $('#ss').val();
         $('#dg').datagrid({
-            url:'/TypeTwo/TypeOne=name'
+            url:'/Shevle/nil'
         });
         $('#query').window('close');
     }
@@ -199,8 +193,8 @@ iconCls="icon-search" closed="true" maximizable="false" minimizable="false" coll
             <tr>
                 <td>
                     <select name="select" id="ss">
-                        <option value="type_no">编号</option>
-                        <option value="name_s">简称</option>
+                        <option value="no">编号</option>
+                        <option value="name">名称</option>
                     </select>
                 </td>
                 <td><input type="text" name="id" id="qq"  required="true"></td>

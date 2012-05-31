@@ -1,18 +1,6 @@
 <script>
-    var type_one_id_edit;
-    $(function(){
-        var myKeyHandler = $.extend({},$.fn.combobox.defaults.keyHandler,{
-            enter: function(){
-                var q = $(this).combobox("getText");
-                $(this).combobox("reload","/get/TypeOne/nil/name="+q+"/nil");
-            },
-            query:function(q){
-                $(this).combobox("setValue",q);
-                $(this).combobox("reload","/get/TypeOne/nil/name="+q+"/nil");
-            }
-        });
-
-        $('#dg').datagrid({
+	$(function(){
+		$('#dg').datagrid({
             iconCls:"icon-ok",
             fit:true,
             loadMsg:'数据加载中请稍后……',
@@ -20,34 +8,12 @@
             height:200,
             pageList:[13,20,50,100],
             striped:true,
-            url:"/TypeTwo/TypeOne=name",
+            url:"/Supplier/nil",
             idField:"id",
             singleSelect:true,
             columns:[[
                 {field:'id',title:'key',rowspan:2,align:'center',editor:'numberbox',hidden:true},
-                {field:'type_no',title:'中类编号',width:120,rowspan:2,align:'center',editor:'text'},
-                {field:'type_one_id',title:'fk1',rowspan:2,align:'center',editor:'numberbox',hidden:true},
-                {field:'typeone_name',title:'大类名称',width:120,rowspan:2,align:'center',
-                    editor:{
-                        type:"combobox",
-                        options:{
-                            valueField:"id",
-                            textField:"name",
-                            url:"/get/TypeOne/nil/nil/nil",
-                            panelHeight:"auto",
-                            required:true,
-                            keyHandler: myKeyHandler,
-                            missingMessage:"清选择中类",
-                            onSelect:function(record){
-                                type_one_id_edit.target.numberbox("setValue",record.id);
-                                $(this).combobox("setValue",record.name);
-                            }
-                        }
-                     }
-                },
-                {field:'name',title:'中类名称',width:250,rowspan:2,align:'left',editor:'text'},
-                {field:'name_s',title:'中类简称',width:100,rowspan:2,align:'center',editor:'text'},
-                {field:'operator',title:'',width:70,rowspan:2,align:'center',
+                {field:'operator',title:'操作列',width:70,rowspan:2,align:'center',
                     formatter:function(value,row,index){
                         if(row.editing){
                             var s ='<a href="javascript:void(0);" onclick="saveRow('+index+')" style="text-decoration: none;color: #800080;">保存</a>  ';
@@ -60,6 +26,14 @@
                         }
                     }
                 },
+                {field:'name',title:'名称',width:80,rowspan:2,align:'left',editor:'text'},
+                {field:'name_s',title:'简称',width:100,rowspan:2,align:'left',editor:'text'},
+                {field:'telphone',title:'电话',width:100,rowspan:2,align:'center',editor:'text'},
+                {field:'ceilphone',title:'联系手机',width:100,rowspan:2,align:'center',editor:'text'},
+                {field:'fax',title:'传真',width:100,rowspan:2,align:'center',editor:'text'},
+                {field:'address',title:'地址',width:200,rowspan:2,align:'left',editor:'text'},
+                {field:'remark',title:'备注',width:240,rowspan:2,align:'left',editor:'text'},
+                
                 {field:'use_flag',hidden:true},
                 {field:'add_id',hidden:true},
                 {field:'add_date',hidden:true},
@@ -95,12 +69,11 @@
                 $('#dg').datagrid('refreshRow',index);
                 count--;
             }
-        });
-    });
+		});
+	});
     var count = 0;
     function editRow(index){
         $('#dg').datagrid('beginEdit',index);
-        type_one_id_edit = $('#dg').datagrid('getEditors',index)[2];
     }
     function deleteRow(index){
         var selected = $('#dg').datagrid('getSelected',index);
@@ -113,7 +86,7 @@
             if(d){
             $.ajax({
                 type:"POST",
-                url:"/TypeTwo/delete",
+                url:"/Supplier/delete",
                 data:"id="+selected.id,
                 success:function(data){
                     if(data!=""){
@@ -129,19 +102,25 @@
     }
     function saveRow(index){
         $('#dg').datagrid('endEdit',index);
+        /*
+         * 将数据保存到数据库
+         * */
         var select = $('#dg').datagrid('getSelected');
-        var obj ={};
+        var obj ={}; //将信息保存在数组中
         obj.id= select.id;
-        obj.type_no= select.type_no;
         obj.name = select.name;
-        obj.type_one_id = select.type_one_id;
         obj.name_s = select.name_s;
+        obj.ceilphone = select.ceilphone;
+        obj.telphone = select.telphone;
+        obj.fax = select.fax;
+        obj.address = select.address;
+        obj.remark = select.remark;
         obj.use_flag = select.use_flag;
         if(select){
             $.ajax({
             type:'POST',
             dataType:"json",
-            url:'/TypeTwo/save',
+            url:'/Supplier/save',
             data:{"data":obj},
             success:function(data){
                 if(data.error_type=='-1'){
@@ -166,18 +145,18 @@
             $('#dg').datagrid('endEdit', lastIndex);
             $('#dg').datagrid('appendRow',{
                 id:'',
-                type_no:'',
-                type_one_id:'',
                 name:'',
                 name_s:'',
-                typeone_name:'',
-                use_flag:'0'
+                telphone:'',
+                ceilphone:'',
+                fax:'',
+                address:'',
+                remark:'',
+                use_flag:''
             });
             var lastIndex = $('#dg').datagrid('getRows').length-1;
-            $('#dg').datagrid('endEdit', lastIndex);
             $('#dg').datagrid('selectRow', lastIndex);
             $('#dg').datagrid('beginEdit', lastIndex);
-            type_one_id_edit = $('#dg').datagrid('getEditors',lastIndex)[2];
         } 
     }
     
@@ -186,7 +165,7 @@
         queryParams.queryWord = $('#qq').val();
         queryParams.queryType = $('#ss').val();
         $('#dg').datagrid({
-            url:'/TypeTwo/TypeOne=name'
+            url:'/Supplier/nil'
         });
         $('#query').window('close');
     }
@@ -199,8 +178,8 @@ iconCls="icon-search" closed="true" maximizable="false" minimizable="false" coll
             <tr>
                 <td>
                     <select name="select" id="ss">
-                        <option value="type_no">编号</option>
-                        <option value="name_s">简称</option>
+                        <option value="id">编号</option>
+                        <option value="name">名称</option>
                     </select>
                 </td>
                 <td><input type="text" name="id" id="qq"  required="true"></td>

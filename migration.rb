@@ -183,3 +183,46 @@ end
 if not Shevle.table_exists?
 	AddShevle.up
 end
+
+#create goods
+class AddGood < ActiveRecord::Migration 
+	def self.up
+		create_table :goods do |t|
+			t.string :no
+			t.string :spec
+			t.string :name
+			t.string :name_s
+			t.string :picture
+			t.string :barcode
+			t.string :unit
+			t.integer :unit_price
+			t.integer :price
+			t.string :area
+			t.string :pruduce_date
+			t.string :valildity_date
+			t.string :shevle_no
+			t.integer :shevle_least
+			t.integer :shevle_most
+			t.integer :stock_most
+			t.integer :stock_least
+			t.string :supplier_id
+			t.string :supplier_name
+			t.string :type_one_id
+			t.string :type_two_id
+			t.string :type_three_id
+			t.string :use_flag
+			t.string :add_id
+			t.string :add_date
+			t.string :upd_id
+			t.string :upd_date
+		end
+	end
+
+	def self.down
+		drop_table :goods
+	end
+end
+
+if not Good.table_exists?
+	AddGood.up
+end
