@@ -198,9 +198,9 @@ class AddGood < ActiveRecord::Migration
 			t.integer :unit_price
 			t.integer :price
 			t.string :area
-			t.string :pruduce_date
+			t.string :produce_date
 			t.string :valildity_date
-			t.string :shevle_no
+			t.string :shevle_id
 			t.integer :shevle_least
 			t.integer :shevle_most
 			t.integer :stock_most

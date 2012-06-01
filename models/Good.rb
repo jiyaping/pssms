@@ -7,5 +7,5 @@ class Good < ActiveRecord::Base
 	belongs_to :TypeTwo,:foreign_key=>"type_two_id"
 	belongs_to :TypeThree,:foreign_key=>"type_three_id"
 	belongs_to :Supplier,:foreign_key=>"supplier_id"
-	belongs_to :Shevle,:foreign_key=>"type_two_id"	
+	belongs_to :Shevle,:foreign_key=>"shevle_id"	
 end

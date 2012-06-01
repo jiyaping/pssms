@@ -11,9 +11,9 @@ end
 ################## 基础信息模块 ##################
 post "/:type/save" do
 	logger_user(request.path,params.inspect)
+	Log.debug "#{params.inspect}"
 
 	content_type 'applicaton/json',:charset=>'utf-8'
-	Log.debug "#{params.inspect}"
 	if eval(params[:type]).save_or_update(params["data"],session[:login_id])
 		{message: "保存成功",error_type: "0"}.to_json
 	else
@@ -21,9 +21,18 @@ post "/:type/save" do
 	end
 end
 
+post "/:type/delete" do
+	logger_user(request.path,params.inspect)
+	Log.debug "#{params.inspect}"
+
+	content_type 'text/plain',:charset=>'utf-8'
+	"删除失败" if !(eval(params[:type]).find(params["id"]).destroy.nil?)
+end
+
 post "/:type/:fields" do
 	logger_user(request.path,params.inspect)
 	Log.debug "#{params.inspect}"
+	
 	content_type 'applicaton/json'
 	total = session[:total] || eval(params["type"]).count
 	queryHash = {} 			#查询参数
@@ -34,14 +43,6 @@ post "/:type/:fields" do
 	return_hash={:total=>total,:rows=>
 		eval(params[:type]).easyui_rows(params["page"],params["rows"],queryHash,add_fields)}
 	return_hash.to_json
-end
-
-post "/:type/delete" do
-	logger_user(request.path,params.inspect)
-
-	content_type 'text/plain',:charset=>'utf-8'
-	Log.debug "#{params.inspect}"
-	"delete failed !" if !eval(params[:type]).find(params["id"]).destroy
 end
 
 =begin

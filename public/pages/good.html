@@ -1,9 +1,25 @@
-<script>
-    var type_one_id = "";
-    var type_two_id = "";
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>进销存系统首页</title>
+    <link rel="stylesheet" type="text/css" href="../js/themes/gray/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../js/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="../js/application.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/locale/easyui-lang-zh_CN.js"></script>
+    <script>
+    var change1 = false;
+    var change2 = false;
+    var type_one_id_editor = "";
+    var type_two_id_editor = "";
+    var type_three_id_editor = "";
+    var supplier_id_editor = "";
+    var shevle_id_editor = "";
     var type_two_name_combobox;
     var type_three_name_combobox;
-    var supplier_id_editor;
     $(function(){
         var type_one_name_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
             enter: function(){
@@ -18,12 +34,14 @@
         var type_two_name_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
             enter: function(){
                 q = $(this).combobox("getText");
-                $(this).combobox("reload","/get/TypeTwo/nil/type_one_id="+type_one_id+"&name="+q+"/nil"); 
+                temp_id = type_one_id_editor.target.numberbox("getValue");
+                $(this).combobox("reload","/get/TypeTwo/nil/type_one_id="+temp_id+"&name="+q+"/nil"); 
             },
             query:function(q){
-                if(type_one_id!=""){
+                if(change1){
                     $(this).combobox("setValue",q);
-                    $(this).combobox("reload","/get/TypeTwo/nil/type_one_id="+type_one_id+"&name="+q+"/nil"); 
+                    temp_id = type_one_id_editor.target.numberbox("getValue");
+                    $(this).combobox("reload","/get/TypeTwo/nil/type_one_id="+temp_id+"&name="+q+"/nil"); 
                 }else{
                     $.messager.alert('提示','请选择大类');
                 }
@@ -33,12 +51,16 @@
         var type_three_name_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
             enter: function(){
                 q = $(this).combobox("getText");
-                $(this).combobox("reload","/get/TypeThree/nil/type_one_id="+type_one_id+"&type_two_id="+type_two_id+"&name="+q+"/nil");
+                temp_id1 = type_one_id_editor.target.numberbox("getValue");
+                temp_id2 = type_two_id_editor.target.numberbox("getValue");
+                $(this).combobox("reload","/get/TypeThree/nil/type_one_id="+temp_id1+"&type_two_id="+temp_id2+"&name="+q+"/nil");
             },
             query:function(q){
-                if(type_two_id!=""){
+                if(change2){
                     $(this).combobox("setValue",q);
-                    $(this).combobox("reload","/get/TypeThree/nil/type_one_id="+type_one_id+"&type_two_id="+type_two_id+"&name="+q+"/nil"); 
+                    temp_id1 = type_one_id_editor.target.numberbox("getValue");
+                    temp_id2 = type_two_id_editor.target.numberbox("getValue");
+                    $(this).combobox("reload","/get/TypeThree/nil/type_one_id="+temp_id1+"&type_two_id="+temp_id2+"&name="+q+"/nil"); 
                 }else{
                     $.messager.alert('提示','请选择中类');
                 }
@@ -72,10 +94,9 @@
             fit:true,
             loadMsg:'数据加载中请稍后……',
             pageSize:13,
-            height:200,
             pageList:[13,20,50,100],
             striped:true,
-            url:"/Good/nil",
+            url:"/Good/TypeOne=name&TypeTwo=name&TypeThree=name&Shevle=name&Supplier=name",
             idField:"id",
             singleSelect:true,
             columns:[[
@@ -94,9 +115,10 @@
                     }
                 },
                 {field:'no',title:'商品编号',width:100,rowspan:2,align:'center',editor:'text'},
-                {field:'name',title:'商品名称',width:120,rowspan:2,align:'center',editor:'text'},
-                {field:'name_s',title:'商品简称',width:120,rowspan:2,align:'center',editor:'text'},
-                {field:'type_one_id',title:'大类',width:100,rowspan:2,align:'center',
+                {field:'name',title:'商品名称',width:120,rowspan:2,align:'left',editor:'text'},
+                {field:'name_s',title:'商品简称',width:80,rowspan:2,align:'left',editor:'text'},
+                {field:'type_one_id',title:'商品大类',width:120,rowspan:2,align:'center',editor:'numberbox',hidden:true},
+                {field:'typeone_name',title:'大类',width:80,rowspan:2,align:'center',
                     editor:{
                         type:"combobox",
                         options:{
@@ -110,17 +132,17 @@
                             onSelect:function(record){
                                 $(this).combobox("setValue",record.name);
                                 type_two_name_combobox.target.combobox('reload','/get/TypeTwo/id,name,type_no/type_one_id='+record.id+'/nil');
-                                type_one_id = record.id;
+                                type_one_id_editor.target.numberbox("setValue",record.id);
+                                change1 = true;
                             }
                         }
                      },
                      formatter:function(value,row,index){
-                        if(value!=""){
-                            type_one_id = value;
-                        }
+                        return value;
                      }
                 },
-                {field:'type_two_id',title:'中类',width:100,rowspan:2,align:'center',
+                {field:'type_two_id',title:'商品小类',width:120,rowspan:2,align:'center',editor:'numberbox',hidden:true},
+                {field:'typetwo_name',title:'中类',width:80,rowspan:2,align:'center',
                     editor:{
                         type:"combobox",
                         options:{
@@ -132,10 +154,11 @@
                             keyHandler:type_two_name_handler,
                             missingMessage:"清选择中类",
                             onSelect:function(record){
-                                if(type_one_id!=""){
+                                if(change1){
                                     $(this).combobox("setValue",record.name);
                                     type_three_name_combobox.target.combobox('reload','/get/TypeThree/nil/type_one_id='+type_one_id+'&type_two_id='+record.id+'/nil');
-                                    type_two_id = record.id;
+                                    type_two_id_editor.target.numberbox("setValue",record.id);
+                                    change2 = true;
                                 }else{
                                     $.messager.alert("提示","请先选择大类");
                                     return;
@@ -144,12 +167,11 @@
                         }
                      },
                      formatter:function(value,row,index){
-                        if(value!=""){
-                            type_two_id = value;
-                        }
+                        return value;
                      }
                 },
-                {field:'type_three_id',title:'小类',width:100,rowspan:2,align:'center',
+                {field:'type_three_id',title:'商品小类',width:120,rowspan:2,align:'center',editor:'numberbox',hidden:true},
+                {field:'typethree_name',title:'小类',width:100,rowspan:2,align:'center',
                     editor:{
                         type:"combobox",
                         options:{
@@ -161,8 +183,9 @@
                             keyHandler:type_three_name_handler,
                             missingMessage:"清选择小类",
                             onSelect:function(record){
-                                if(type_two_id){
-                                    $(this).combobox("setValue",record.name);    
+                                if(change2){
+                                    $(this).combobox("setValue",record.name);
+                                    type_three_id_editor.target.numberbox("setValue",record.id);
                                 }else{
                                     $.messager.alert("提示","请先选择中类");
                                     return;
@@ -173,12 +196,13 @@
                 },
                 {field:'spec',title:'商品规格',width:60,rowspan:2,align:'center',editor:'text'},
                 {field:'barcode',title:'商品条码',width:100,rowspan:2,align:'center',editor:'text'},
+                {field:'unit',title:'计价单位',width:60,rowspan:2,align:'center',editor:'text'},
                 {field:'unit_price',title:'进价',width:60,rowspan:2,align:'center',editor:'numberbox'},
                 {field:'price',title:'售价',width:60,rowspan:2,align:'center',editor:'numberbox'},
-                {field:'area',title:'产地',width:100,rowspan:2,align:'center',editor:'text'},
+                {field:'area',title:'产地',width:100,rowspan:2,align:'left',editor:'text'},
                 {field:'produce_date',title:'生产日期',width:100,rowspan:2,align:'center',editor:'text'},
                 {field:'valildity_date',title:'有效日期',width:60,rowspan:2,align:'center',editor:'numberbox'},
-                {field:'supplier_id',title:'供应商id',width:100,rowspan:2,align:'center',editor:'text',hidden:true},
+                {field:'supplier_id',title:'供应商id',width:100,rowspan:2,align:'center',editor:'numberbox',hidden:true},
                 {field:'supplier_name',title:'供应商名称',width:100,rowspan:2,align:'center',editor:{
                         type:"combobox",
                         options:{
@@ -190,13 +214,14 @@
                             required:true,
                             missingMessage:"清选择供应商",
                             onSelect:function(record){
-                                supplier_id_editor.target.text("setValue",record.id);
+                                supplier_id_editor.target.numberbox("setValue",record.id);
                                 $(this).combobox("setValue",record.name);
                             }
                         }
                      }
                  },
-                {field:'shevle_id',title:'摆放货架',width:100,rowspan:2,align:'center',editor:{
+                 {field:'shevle_id',title:'货架id',width:120,rowspan:2,align:'center',editor:'numberbox',hidden:true},
+                {field:'shevle_name',title:'摆放货架',width:100,rowspan:2,align:'center',editor:{
                         type:"combobox",
                         options:{
                             valueField:"id",
@@ -207,7 +232,7 @@
                             required:true,
                             missingMessage:"清选择货架",
                             onSelect:function(record){
-                                supplier_id_editor.target.text("setValue",record.id);
+                                shevle_id_editor.target.numberbox("setValue",record.id);
                                 $(this).combobox("setValue",record.name);
                             }
                         }
@@ -258,9 +283,13 @@
     function editRow(index){
         $('#dg').datagrid('beginEdit',index);
         temp_arr = $('#dg').datagrid("getEditors",index);
-        type_two_name_combobox = temp_arr[4];
-        type_three_name_combobox=temp_arr[5];
-        supplier_id_editor=temp_arr[13];
+        type_two_name_combobox = temp_arr[6];
+        type_three_name_combobox=temp_arr[8];
+        type_one_id_editor = temp_arr[3];
+        type_two_id_editor = temp_arr[5];
+        type_three_id_editor = temp_arr[7];
+        shevle_id_editor = temp_arr[19];
+        supplier_id_editor=temp_arr[17];
     }
     function deleteRow(index){
         var selected = $('#dg').datagrid('getSelected',index);
@@ -276,6 +305,7 @@
                 url:"/Good/delete",
                 data:"id="+selected.id,
                 success:function(data){
+                    ViewObject(data);
                     if(data!=""){
                         $.messager.alert('warning',data);
                     }else{
@@ -288,11 +318,11 @@
         }
     }
     function saveRow(index){
+        alert(type_one_id_editor.target.numberbox('getValue'));
         $('#dg').datagrid('endEdit',index);
         var select = $('#dg').datagrid('getSelected');
         var obj ={};
         obj.id= select.id;
-        obj.type_no= select.type_no;
         obj.name = select.name;
         obj.name_s = select.name_s;
         obj.no = select.no;
@@ -303,7 +333,7 @@
         obj.unit_price = select.unit_price;
         obj.price = select.price;
         obj.area = select.area;
-        obj.produce_date = select.area;
+        obj.produce_date = select.produce_date;
         obj.valildity_date = select.valildity_date;
         obj.shevle_id = select.shevle_id;
         obj.shevle_least = select.shevle_least;
@@ -312,11 +342,11 @@
         obj.stock_least = select.stock_least;
         obj.supplier_id = select.supplier_id;
         obj.supplier_name = select.supplier_name;
-        obj.type_one_id = select.type_on_id;
+        obj.type_one_id = select.type_one_id;
         obj.type_two_id = select.type_two_id;
         obj.type_three_id = select.type_three_id;
         obj.use_flag = select.use_flag;
-        //ViewObject(obj);
+        ViewObject(obj);
         if(select){
             $.ajax({
             type:'POST',
@@ -334,6 +364,9 @@
             }
         });
         }
+        //临时变量重新复制
+        change1 = false;
+        change2 = false;
     }
     function cancelRow(index){
         $('#dg').datagrid('cancelEdit',index);
@@ -346,7 +379,6 @@
             $('#dg').datagrid('endEdit', lastIndex);
             $('#dg').datagrid('appendRow',{
                 id:'',
-                type_no:'',
                 name :'',
                 name_s :'',
                 no :'',
@@ -376,9 +408,13 @@
             $('#dg').datagrid('selectRow', lastIndex);
             $('#dg').datagrid('beginEdit', lastIndex);
             temp_arr = $('#dg').datagrid("getEditors",lastIndex);
-            type_two_name_combobox = temp_arr[4];
-            type_three_name_combobox=temp_arr[5];
-            supplier_id_editor=temp_arr[13];
+            type_two_name_combobox = temp_arr[6];
+            type_three_name_combobox=temp_arr[8];
+            type_one_id_editor = temp_arr[3];
+            type_two_id_editor = temp_arr[5];
+            type_three_id_editor = temp_arr[7];
+            shevle_id_editor = temp_arr[19];
+            supplier_id_editor=temp_arr[17];
         } 
     }
     
@@ -392,22 +428,28 @@
         $('#query').window('close');
     }
 </script>
-<table id="dg"></table>
-<div id="query" class="easyui-window" title="查询" style="padding: 10px;width: 400px;height:100;"
-iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <select name="select" id="ss">
-                        <option value="type_no">编号</option>
-                        <option value="name">名称</option>
-                        <option value="barcode">条形码</option>
-                    </select>
-                </td>
-                <td><input type="text" name="id" id="qq"  required="true"></td>
-                <td><a class="easyui-linkbutton" iconCls="icon-search" href="javascript:void(0);" onclick="query()">查询</a></td>
-            </tr>
-        </table>
+</head>    
+<body class="easyui-layout">
+    <div region="center">
+    <table id="dg"  style="overflow-y:hidden"></table>
+        <div id="query" class="easyui-window" title="查询" style="padding: 10px;width: 400px;height:100;"
+        iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <select name="select" id="ss">
+                                <option value="type_no">编号</option>
+                                <option value="name">名称</option>
+                                <option value="barcode">条形码</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="id" id="qq"  required="true"></td>
+                        <td><a class="easyui-linkbutton" iconCls="icon-search" href="javascript:void(0);" onclick="query()">查询</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+</html>

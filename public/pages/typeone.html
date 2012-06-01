@@ -1,6 +1,18 @@
-<script>
-	$(function(){
-		$('#dg').datagrid({
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>进销存系统首页</title>
+    <link rel="stylesheet" type="text/css" href="../js/themes/gray/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../js/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="../js/application.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/locale/easyui-lang-zh_CN.js"></script>
+    <script>
+    $(function(){
+        $('#dg').datagrid({
             iconCls:"icon-ok",
             fit:true,
             loadMsg:'数据加载中请稍后……',
@@ -64,8 +76,8 @@
                 $('#dg').datagrid('refreshRow',index);
                 count--;
             }
-		});
-	});
+        });
+    });
     var count = 0;
     function editRow(index){
         $('#dg').datagrid('beginEdit',index);
@@ -154,21 +166,27 @@
         $('#query').window('close');
     }
 </script>
-<table id="dg"></table>
-<div id="query" class="easyui-window" title="查询" style="padding: 10px;width: 400px;height:100;"
-iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <select name="select" id="ss">
-                        <option value="type_no">编号</option>
-                        <option value="name_s">简称</option>
-                    </select>
-                </td>
-                <td><input type="text" name="id" id="qq"  required="true"></td>
-                <td><a class="easyui-linkbutton" iconCls="icon-search" href="javascript:void(0);" onclick="query()">查询</a></td>
-            </tr>
-        </table>
+</head>    
+<body class="easyui-layout">
+    <div region="center">
+        <table id="dg"></table>
+        <div id="query" class="easyui-window" title="查询" style="padding: 10px;width: 400px;height:100;"
+        iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <select name="select" id="ss">
+                                <option value="type_no">编号</option>
+                                <option value="name_s">简称</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="id" id="qq"  required="true"></td>
+                        <td><a class="easyui-linkbutton" iconCls="icon-search" href="javascript:void(0);" onclick="query()">查询</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+</html>

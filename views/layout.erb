@@ -32,7 +32,8 @@
 		function addTab(pTitle,pURL){
 			$('#tt').tabs('add',{
 				title:pTitle,
-				href:pURL,
+				cache:false,
+				content:'<iframe frameborder="0" style="width:100%;height:100%" src="'+pURL+'"></iframe>',
 				closable:true
 			});
 		}
@@ -83,7 +84,8 @@
 	<div region="west" id="nav" split="true" title="导航栏" style="width:280px;padding1:1px;overflow:hidden;">
 		<div class="easyui-accordion" fit="true" border="false">
 			<div title="采购管理">
-				<li><a href="">采购申请</a></li>
+				<li onclick="javascript:addTab('添加采购申请','pages/purchasing.html')"><a href="javascript:void(0);">添加采购申请</a></li>
+				<li onclick="javascript:addTab('查看采购计划','pages/purchase.html')"><a href="javascript:void(0);">查看采购计划</a></li>
 			</div>
 			<div title="库存管理">
 				<li><a href="#">商品入库</a></li>
@@ -120,6 +122,8 @@
 	</div>
 	<div region="center" style="overflow:hidden;">
 		<div class="easyui-tabs" id="tt" fit="true" border="false">
+			<div title="主功能面板">
+			</div>
 		</div>
 	</div>
 </body>
