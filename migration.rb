@@ -207,9 +207,9 @@ class AddGood < ActiveRecord::Migration
 			t.integer :stock_least
 			t.string :supplier_id
 			t.string :supplier_name
-			t.string :type_one_id
-			t.string :type_two_id
-			t.string :type_three_id
+			t.integer :type_one_id
+			t.integer :type_two_id
+			t.integer :type_three_id
 			t.string :use_flag
 			t.string :add_id
 			t.string :add_date
@@ -225,4 +225,124 @@ end
 
 if not Good.table_exists?
 	AddGood.up
+end
+
+#create purchase
+class AddPurchase < ActiveRecord::Migration 
+	def self.up
+		create_table :purchases do |t|
+			t.string 	:no
+			t.integer 	:good_id
+			t.integer 	:type_one_id
+			t.integer 	:type_two_id
+			t.integer 	:type_three_id
+			t.string 	:good_name
+			t.string 	:good_unit
+			t.string 	:pur_count
+			t.string 	:pur_date
+			t.string 	:pur_id
+			t.string 	:unit
+			t.integer 	:unit_price
+			t.string 	:supplier_id
+			t.string 	:supplier_name
+			t.string 	:enforce_code
+			t.string 	:check_flag
+			t.string 	:remark
+			t.string 	:use_flag
+			t.string 	:add_id
+			t.string 	:add_date
+			t.string 	:upd_id
+			t.string 	:upd_date
+		end
+	end
+
+	def self.down
+		drop_table :purchases
+	end
+end
+
+if not Purchase.table_exists?
+	AddPurchase.up
+end
+
+
+#create inventory
+class AddInventory < ActiveRecord::Migration 
+	def self.up
+		create_table :inventorys do |t|
+			t.integer 	:purchase_id
+			t.string 	:purchase_no
+			t.integer 	:good_id
+			t.integer 	:type_one_id
+			t.integer 	:type_two_id
+			t.integer 	:type_three_id
+			t.string 	:good_name
+			t.string 	:good_barcode
+			t.string 	:good_unit
+			t.string 	:unit_price
+			t.integer 	:quantity
+			t.string 	:arrival_date
+			t.string 	:produce_date
+			t.string 	:expiry_date
+			t.string 	:supplier_id
+			t.string 	:supplier_name
+			t.string 	:enforce_code
+			t.string 	:check_flag
+			t.string 	:remark
+			t.string 	:use_flag
+			t.string 	:main_flag
+			t.string 	:add_id
+			t.string 	:add_date
+			t.string 	:upd_id
+			t.string 	:upd_date
+		end
+	end
+
+	def self.down
+		drop_table :inventorys
+	end
+end
+
+if not Inventory.table_exists?
+	AddInventory.up
+end
+
+#create inventory
+class AddInventoryMX < ActiveRecord::Migration 
+	def self.up
+		create_table :inventorys_mx do |t|
+			t.integer 	:purchase_id
+			t.string 	:purchase_no
+			t.integer 	:good_id
+			t.integer 	:type_one_id
+			t.integer 	:type_two_id
+			t.integer 	:type_three_id
+			t.string 	:good_name
+			t.string 	:good_barcode
+			t.string 	:good_unit
+			t.string 	:unit_price
+			t.integer 	:quantity
+			t.string 	:arrival_date
+			t.string 	:produce_date
+			t.string 	:expiry_date
+			t.string 	:supplier_id
+			t.string 	:supplier_name
+			t.string 	:enforce_code
+			t.string 	:reason_flag
+			t.string 	:use_flag
+			t.string 	:main_flag
+			t.string 	:add_id
+			t.string 	:add_date
+			t.string 	:upd_id
+			t.string 	:upd_date
+		end
+	end
+
+	def self.down
+		drop_table :inventorys_mx
+	end
+end
+
+if not InventoryMX.table_exists?
+	AddInventoryMX.up
 end

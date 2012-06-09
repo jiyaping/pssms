@@ -99,3 +99,8 @@ li{
 	color:black;
 	background-color:white;
 }
+
+#search{
+	border:0px;
+	width:300px;
+}

@@ -46,8 +46,48 @@ post "/:type/:fields" do
 end
 
 =begin
+	库存模块管理
+=end
+get "/inventory/good/:id" do 
+	content_type 'applicaton/json',:charset=>'utf-8'
+	Log.debug "#{params.inspect}"
+	good = Good.find(params[:id])
+	inv = Inventory.where("good_id=? AND main_flag=?",params[:id],"0").first
+	inv = Inventory.new if inv.nil?
+	good.attributes.merge!(inv.attributes){|k,v1,v2| v1}.to_json
+end
+
+post "/inventory/save" do
+	logger_user(request.path,params.inspect)
+	content_type 'applicaton/json',:charset=>'utf-8'
+
+	Log.debug "#{params.inspect}"
+	if Inventory.do_instock(params[:data])
+		'保存成功'
+	else
+		'保存失败'
+	end
+end
+
+=begin
 	公共信息模块
 =end
+
+######## 获取商品信息########
+post "/get/good/" do
+	Log.debug "#{params.inspect}" 
+	name = params[:name]
+
+	rows = []
+	Good.where("name LIKE '%#{name}%'").select("id,name,stock_most,stock_least").each do |row|
+		rows<<(row.attributes.merge!({"quantity"=>Inventory.where("GOOD_ID=? AND MAIN_FLAG=?",row.id,"0")}))
+	end
+	rows.sort! do |x,y|
+		x[:quantity].to_f-x[:stock_least].to_f<=>y[:quantity].to_f-y[:stock_least].to_f
+	end
+	rows
+end
+
 ######## 获取下拉列表框########
 post "/get/:type/:fields/:query/:count" do 
 	content_type 'applicaton/json',:charset=>'utf-8'
@@ -62,6 +102,7 @@ post "/get/:type/:fields/:query/:count" do
 	Log.debug "#{hash}"
 	hash.to_json
 end
+
 
 ########登录／退出########
 get "/login" do 

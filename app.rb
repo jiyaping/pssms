@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+# require 'sinatra'   # required for framework detection in cloud foundry.
 require 'rubygems'
 require 'sinatra'
 

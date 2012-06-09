@@ -13,13 +13,17 @@
     <script>
     var change1 = false;
     var change2 = false;
+    var change3 = false;
     var type_one_id_editor = "";
     var type_two_id_editor = "";
     var type_three_id_editor = "";
-    var supplier_id_editor = "";
-    var shevle_id_editor = "";
+    var good_id_editor = "";
+    var quantity_editor = "";
+    var stock_most_editor = "";
     var type_two_name_combobox;
     var type_three_name_combobox;
+    var type_three_name_combobox;
+    var good_comobox;
     $(function(){
         var type_one_name_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
             enter: function(){
@@ -67,25 +71,16 @@
             }
         });
 
-        var supplier_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
+        var good_name_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
             enter: function(){
+                temp_type_three_id = type_three_id_editor.target.numberbox("getValue");
                 q = $(this).combobox("getText");
-                $(this).combobox("reload","/get/Supplier/nil/"+q+"/nil");
+                $(this).combobox("reload","/get/Good/nil/type_three_id="+temp_type_three_id+"&name="+q+"/nil");
             },
             query:function(q){
-                    $(this).combobox("setValue",q);
-                    $(this).combobox("reload","/get/Supplier/nil/name="+q+"/nil");
-            }
-        });
-
-        var shevle_handler = $.extend({},$.fn.combobox.defaults.keyHandler,{
-            enter: function(){
-                q = $(this).combobox("getText");
-                $(this).combobox("reload","/get/Shevle/nil/"+q+"/nil");
-            },
-            query:function(q){
-                    $(this).combobox("setValue",q);
-                    $(this).combobox("reload","/get/Shevle/nil/name="+q+"/nil");
+                temp_type_three_id = type_three_id_editor.target.numberbox("getValue");
+                $(this).combobox("setValue",q);
+                $(this).combobox("reload","/get/Good/nil/type_three_id="+temp_type_three_id+"&name="+q+"/nil");
             }
         });
 
@@ -96,27 +91,11 @@
             pageSize:13,
             pageList:[13,20,50,100],
             striped:true,
-            url:"/Good/TypeOne=name&TypeTwo=name&TypeThree=name&Shevle=name&Supplier=name",
+            url:"",
             idField:"id",
             singleSelect:true,
             columns:[[
                 {field:'id',title:'key',rowspan:2,align:'center',hidden:true},
-                {field:'operator',title:'操作',width:70,rowspan:2,align:'center',
-                    formatter:function(value,row,index){
-                        if(row.editing){
-                            var s ='<a href="javascript:void(0);" onclick="saveRow('+index+')" style="text-decoration: none;color: #800080;">保存</a>  ';
-                            var c ='<a href="javascript:void(0);" onclick="cancelRow('+index+');" style="text-decoration: none;color: #800080;">取消</a>';
-                            return s+c;
-                        }else{
-                            var e = '<a href="javascript:void(0);" onclick="editRow('+index+')" style="text-decoration: none;color: #800080;">编辑</a> ';
-                            var d = '<a href="javascript:void(0);" onclick="deleteRow('+index+')" style="text-decoration: none;color: #800080;">删除</a>';
-                            return e+d;
-                        }
-                    }
-                },
-                {field:'no',title:'商品编号',width:100,rowspan:2,align:'center',editor:'text'},
-                {field:'name',title:'商品名称',width:120,rowspan:2,align:'left',editor:'text'},
-                {field:'name_s',title:'商品简称',width:80,rowspan:2,align:'left',editor:'text'},
                 {field:'type_one_id',title:'商品大类',width:120,rowspan:2,align:'center',editor:'numberbox',hidden:true},
                 {field:'typeone_name',title:'大类',width:80,rowspan:2,align:'center',
                     editor:{
@@ -131,7 +110,7 @@
                             missingMessage:"清选择大类",
                             onSelect:function(record){
                                 $(this).combobox("setValue",record.name);
-                                type_two_name_combobox.target.combobox('reload','/get/TypeTwo/id,name,type_no/type_one_id='+record.id+'/nil');
+                                //type_two_name_combobox.target.combobox('reload','/get/TypeTwo/id,name,type_no/type_one_id='+record.id+'/nil');
                                 type_one_id_editor.target.numberbox("setValue",record.id);
                                 change1 = true;
                             }
@@ -148,7 +127,7 @@
                         options:{
                             valueField:"id",
                             textField:"name",
-                            url:"/get/TypeTwo/nil/nil/nil",
+                            //url:"/get/TypeTwo/nil/nil/nil",
                             panelHeight:"auto",
                             required:true,
                             keyHandler:type_two_name_handler,
@@ -157,7 +136,7 @@
                                 if(change1){
                                     $(this).combobox("setValue",record.name);
                                     temp_type_one_id = type_one_id_editor.target.numberbox("getValue");
-                                    type_three_name_combobox.target.combobox('reload','/get/TypeThree/nil/type_one_id='+temp_type_one_id+'&type_two_id='+record.id+'/nil');
+                                    //type_three_name_combobox.target.combobox('reload','/get/TypeThree/nil/type_one_id='+temp_type_one_id+'&type_two_id='+record.id+'/nil');
                                     type_two_id_editor.target.numberbox("setValue",record.id);
                                     change2 = true;
                                 }else{
@@ -178,7 +157,7 @@
                         options:{
                             valueField:"id",
                             textField:"name",
-                            url:"/get/TypeThree/id,name/nil/nil",
+                            //url:"/get/TypeThree/id,name/nil/nil",
                             panelHeight:"auto",
                             required:true,
                             keyHandler:type_three_name_handler,
@@ -187,6 +166,8 @@
                                 if(change2){
                                     $(this).combobox("setValue",record.name);
                                     type_three_id_editor.target.numberbox("setValue",record.id);
+                                    change3 = true;
+                                    //good_comobox.target.combobox('reload','/get/Good/nil/type_three_id='+record.id+'/nil');
                                 }else{
                                     $.messager.alert("提示","请先选择中类");
                                     return;
@@ -195,73 +176,80 @@
                         }
                      }
                 },
-                {field:'spec',title:'商品规格',width:60,rowspan:2,align:'center',editor:'text'},
-                {field:'barcode',title:'商品条码',width:100,rowspan:2,align:'center',editor:'text'},
-                {field:'unit',title:'计价单位',width:60,rowspan:2,align:'center',editor:'text'},
-                //{field:'unit_price',title:'进价',width:60,rowspan:2,align:'center',editor:'numberbox'},
-                {field:'price',title:'售价',width:60,rowspan:2,align:'center',editor:'numberbox'},
-                {field:'area',title:'产地',width:100,rowspan:2,align:'left',editor:'text'},
-                //{field:'produce_date',title:'生产日期',width:100,rowspan:2,align:'center',editor:'text'},
-                {field:'valildity_date',title:'有效日期',width:60,rowspan:2,align:'center',editor:'numberbox'},
-                {field:'supplier_id',title:'供应商id',width:100,rowspan:2,align:'center',editor:'numberbox',hidden:true},
-                {field:'supplier_name',title:'供应商名称',width:100,rowspan:2,align:'center',editor:{
+                {field:'good_id',title:'商品编号',width:100,rowspan:2,align:'center',editor:'numberbox',hidden:true},
+                {field:'name',title:'商品名称',width:120,rowspan:2,align:'left',editor:{
                         type:"combobox",
                         options:{
                             valueField:"id",
                             textField:"name",
-                            keyHandler:supplier_handler,
-                            url:"/get/Supplier/nil/nil/nil",
+                            //url:"/get/Good/id,name/nil/nil",
                             panelHeight:"auto",
                             required:true,
-                            missingMessage:"清选择供应商",
+                            keyHandler:good_name_handler,
+                            missingMessage:"清选择商品",
                             onSelect:function(record){
-                                supplier_id_editor.target.numberbox("setValue",record.id);
-                                $(this).combobox("setValue",record.name);
+                                if(change3){
+                                    $(this).combobox("setValue",record.name);
+                                    good_id_editor.target.numberbox("setValue",record.id);
+                                    obj = null;
+                                    $.ajax({
+                                        type:'GET',
+                                        dataType:"JSON",
+                                        url:'/inventory/good/'+record.id,
+                                        success:function(data){
+                                            temp_value = data.quantity || 0;
+                                            quantity_editor.target.numberbox("setValue",temp_value);
+                                            stock_most_editor.target.numberbox("setValue",data.stock_most);
+                                        }
+                                    })
+                                    
+                                }else{
+                                    $.messager.alert("提示","请先选择中类");
+                                    return;
+                                }
                             }
                         }
-                     }
-                 },
-                 {field:'shevle_id',title:'货架id',width:120,rowspan:2,align:'center',editor:'numberbox',hidden:true},
-                {field:'shevle_name',title:'摆放货架',width:100,rowspan:2,align:'center',editor:{
-                        type:"combobox",
-                        options:{
-                            valueField:"id",
-                            textField:"name",
-                            keyHandler:supplier_handler,
-                            url:"/get/Shevle/nil/nil/nil",
-                            panelHeight:"auto",
-                            required:true,
-                            missingMessage:"清选择货架",
-                            onSelect:function(record){
-                                shevle_id_editor.target.numberbox("setValue",record.id);
-                                $(this).combobox("setValue",record.name);
-                            }
+                    }
+                },
+                {field:'unit_price',title:'进价',width:60,rowspan:2,align:'center',editor:'numberbox'},
+                {field:'quantity_inf',title:'入库数量',width:60,rowspan:2,align:'center',editor:'numberbox'},
+                {field:'produce_date',title:'生产日期',width:100,rowspan:2,align:'center',editor:{
+                    type:'datebox',
+                    options:{
+                        required:true
+                    }
+                }},
+                {field:'quantity',title:'当前库存量',width:80,rowspan:2,align:'center',editor:'numberbox'},
+                {field:'stock_most',title:'最大库存量',width:80,rowspan:2,align:'center',editor:'numberbox'},
+                {field:'operator',title:'操作',width:70,rowspan:2,align:'center',
+                    formatter:function(value,row,index){
+                        if(row.editing){
+                            var s ='<a href="javascript:void(0);" onclick="saveRow('+index+')" style="text-decoration: none;color: #800080;">完成</a>  ';
+                            var c ='<a href="javascript:void(0);" onclick="cancelRow('+index+');" style="text-decoration: none;color: #800080;">取消</a>';
+                            return s+c;
+                        }else{
+                            var e = '<a href="javascript:void(0);" onclick="editRow('+index+')" style="text-decoration: none;color: #800080;">编辑</a> ';
+                            var d = '<a href="javascript:void(0);" onclick="deleteRow('+index+')" style="text-decoration: none;color: #800080;">删除</a>';
+                            return e+d;
                         }
-                     }
-                 },
-                {field:'shevle_least',title:'最小货架摆放量',width:100,rowspan:2,align:'center',editor:'numberbox'},
-                {field:'shevle_most',title:'最大货架摆放量',width:100,rowspan:2,align:'center',editor:'numberbox'},
-                {field:'stock_least',title:'最小库存量',width:100,rowspan:2,align:'center',editor:'numberbox'},
-                {field:'stock_most',title:'最大库存量',width:100,rowspan:2,align:'center',editor:'numberbox'},
+                    }
+                },
                 {field:'use_flag',hidden:true},
                 {field:'add_id',hidden:true},
                 {field:'add_date',hidden:true},
                 {field:'upd_id',hidden:true},
                 {field:'upd_date',hidden:true}
                 ]],
-            pagination:true,
             rownumbers:true,
             toolbar:[{
                 text:'增加',
                 iconCls:'icon-add',
                 handler:addRow
-            },'-',{
-                text:'查询',
-                iconCls:'icon-search',
-                handler:function(){
-                    $('#query').window('open');
-                }
-              }
+            },{
+                text:'提交',
+                iconCls:'icon-save',
+                handler:save
+            }
             ],
             onBeforeEdit:function(index,row){
                 row.editing = true;
@@ -282,15 +270,18 @@
     });
     var count = 0;
     function editRow(index){
+        alert(index);
         $('#dg').datagrid('beginEdit',index);
         temp_arr = $('#dg').datagrid("getEditors",index);
-        type_two_name_combobox = temp_arr[6];
-        type_three_name_combobox=temp_arr[8];
-        type_one_id_editor = temp_arr[3];
-        type_two_id_editor = temp_arr[5];
-        type_three_id_editor = temp_arr[7];
-        shevle_id_editor = temp_arr[19];
-        supplier_id_editor=temp_arr[17];
+        type_two_name_combobox = temp_arr[1];
+        type_three_name_combobox=temp_arr[3];
+        type_one_id_editor = temp_arr[0];
+        type_two_id_editor = temp_arr[2];
+        type_three_id_editor = temp_arr[4];
+        good_id_editor = temp_arr[6];
+        good_comobox = temp_arr[7];
+        quantity_editor = temp_arr[11];
+        stock_most_editor = temp_arr[12];
     }
     function deleteRow(index){
         var selected = $('#dg').datagrid('getSelected',index);
@@ -306,7 +297,6 @@
                 url:"/Good/delete",
                 data:"id="+selected.id,
                 success:function(data){
-                    ViewObject(data);
                     if(data!=""){
                         $.messager.alert('warning',data);
                     }else{
@@ -318,40 +308,14 @@
         });
         }
     }
-    function saveRow(index){
-        $('#dg').datagrid('endEdit',index);
-        var select = $('#dg').datagrid('getSelected');
-        var obj ={};
-        obj.id= select.id;
-        obj.name = select.name;
-        obj.name_s = select.name_s;
-        obj.no = select.no;
-        obj.spec = select.spec;
-        //obj.picture = obj.picture;
-        obj.barcode = select.barcode;
-        obj.unit = select.unit;
-        //obj.unit_price = select.unit_price;
-        obj.price = select.price;
-        obj.area = select.area;
-        //obj.produce_date = select.produce_date;
-        obj.valildity_date = select.valildity_date;
-        obj.shevle_id = select.shevle_id;
-        obj.shevle_least = select.shevle_least;
-        obj.shevle_most = select.shevle_most;
-        obj.stock_most = select.stock_most;
-        obj.stock_least = select.stock_least;
-        obj.supplier_id = select.supplier_id;
-        obj.supplier_name = select.supplier_name;
-        obj.type_one_id = select.type_one_id;
-        obj.type_two_id = select.type_two_id;
-        obj.type_three_id = select.type_three_id;
-        obj.use_flag = select.use_flag;
-        ViewObject(obj);
-        if(select){
-            $.ajax({
+
+    function save(){
+        obj = $("#dg").datagrid("getRows");
+        alert(obj);
+        $.ajax({
             type:'POST',
             dataType:"json",
-            url:'/Good/save',
+            url:'/inventory/save',
             data:{"data":obj},
             success:function(data){
                 if(data.error_type=='-1'){
@@ -363,14 +327,19 @@
                 }
             }
         });
-        }
-        //临时变量重新复制
+    }
+
+    function saveRow(index){
+        $('#dg').datagrid('endEdit',index);
         change1 = false;
         change2 = false;
     }
+
     function cancelRow(index){
         $('#dg').datagrid('cancelEdit',index);
+        $('#dg').datagrid('deleteRow',index);
     }
+
     function addRow(){
         if(count>0){
             $.messager.alert('warning','当前还有'+count+'记录正在编辑,请保存','warning');
@@ -380,27 +349,15 @@
             $('#dg').datagrid('appendRow',{
                 id:'',
                 name :'',
-                name_s :'',
-                no :'',
-                spec :'',
-                //picture :'',
-                barcode :'',
-                unit :'',
-                //unit_price :'',
-                price :'',
-                area :'',
-                //produce_date :'',
-                valildity_date :'',
-                shevle_id :'',
-                shevle_least :'',
-                shevle_most :'',
-                stock_most :'',
-                stock_least :'',
-                supplier_id :'',
-                supplier_name :'',
-                type_one_id :'',
-                type_two_id :'',
-                type_three_id :'',
+                good_id :'',
+                unit_price :'',
+                price : '',
+                valildity_date : '',
+                stock_most : '',
+                quantity : '',
+                type_one_id : '',
+                type_two_id : '',
+                type_three_id : '',
                 use_flag :'0'
             });
             var lastIndex = $('#dg').datagrid('getRows').length-1;
@@ -408,48 +365,22 @@
             $('#dg').datagrid('selectRow', lastIndex);
             $('#dg').datagrid('beginEdit', lastIndex);
             temp_arr = $('#dg').datagrid("getEditors",lastIndex);
-            type_two_name_combobox = temp_arr[6];
-            type_three_name_combobox=temp_arr[8];
-            type_one_id_editor = temp_arr[3];
-            type_two_id_editor = temp_arr[5];
-            type_three_id_editor = temp_arr[7];
-            shevle_id_editor = temp_arr[19];
-            supplier_id_editor=temp_arr[17];
-        } 
-    }
-    
-    function query(){
-        var queryParams = $('#dg').datagrid('options').queryParams;
-        queryParams.queryWord = $('#qq').val();
-        queryParams.queryType = $('#ss').val();
-        $('#dg').datagrid({
-            url:'/Good/nil'
-        });
-        $('#query').window('close');
+            type_two_name_combobox = temp_arr[1];
+            type_three_name_combobox=temp_arr[3];
+            type_one_id_editor = temp_arr[0];
+            type_two_id_editor = temp_arr[2];
+            type_three_id_editor = temp_arr[4];
+            good_id_editor = temp_arr[6];
+            good_comobox = temp_arr[7];
+            quantity_editor = temp_arr[11];
+            stock_most_editor = temp_arr[12];
+        }
     }
 </script>
 </head>    
 <body class="easyui-layout">
     <div region="center">
     <table id="dg"  style="overflow-y:hidden"></table>
-        <div id="query" class="easyui-window" title="查询" style="padding: 10px;width: 400px;height:100;"
-        iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
-            <div>
-                <table>
-                    <tr>
-                        <td>
-                            <select name="select" id="ss">
-                                <option value="type_no">编号</option>
-                                <option value="name">名称</option>
-                                <option value="barcode">条形码</option>
-                            </select>
-                        </td>
-                        <td><input type="text" name="id" id="qq"  required="true"></td>
-                        <td><a class="easyui-linkbutton" iconCls="icon-search" href="javascript:void(0);" onclick="query()">查询</a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
     </div>
 </body>
 </html>

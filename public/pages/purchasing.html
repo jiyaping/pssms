@@ -11,33 +11,99 @@
     <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../js/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript"></script>
+    <script type="text/javascript">
+        var data = {"total":0,"rows":[]};
+        var totalCost = 0;
+        
+        $(function(){
+
+            $('#dg').datagrid({
+                singleSelect:true
+            });
+            build_good_list(getGoodInfo($("#good-name").val()));
+            $('#btn').linkbutton({});
+        });
+        
+        function getGoodInfo(name){
+            name = $("#good-name").val();
+            $.ajax({
+                type:"POST",
+                dataType:"JSON",
+                url:"/get/good/",
+                data:{"name":name},
+                success:function(data){
+                    return data;
+                }
+            })
+        }
+
+        function build_good_list(rows){
+            $(".item").remove();
+            info = "";
+            for(var i=0;i<rows.length;i++){
+                info = rows[i].name.substring(0,6)+".../"+rows[i].quantity+"/"+rows[i].stock_most+"/"+rows[i].stock_least;
+                $(".item:last").("<p class='item'><span style='visibility:hidden'>"+rows[i].id+"</span><span>"+info+"</span></p>");
+            }
+        }
+
+        function addProduct(name,price){
+        }
+    </script>
+    <style type="text/css">
+        .item{
+            border-top:1px white solid;
+            margin: 0px;
+            padding:3px 0px;
+            text-align:center;
+        }
+
+        h1{
+            text-align:center;
+            color:#555;
+        }
+        h2{
+            position:absolute;
+            font-size:16px;
+            left:10px;
+            bottom:20px;
+            color:#555;
+        }
+    </style>
 </head>    
 <body class="easyui-layout">
     <div region="center">
-        <ul class="good">
-            <a href="#" class="item">
-                <div>
-                    <p>Balloon</p>
-                    <p>Price:$25</p>
-                </div>
-            </a>
-        </ul>
-    <div class="cart">
-        <h1>Shopping Cart</h1>
-        <div style="background:#fff">
-        <table id="cartcontent" fitColumns="true" style="width:300px;height:auto;">
-            <thead>
-                <tr>
-                    <th field="name" width=140>Name</th>
-                    <th field="quantity" width=60 align="right">Quantity</th>
-                    <th field="price" width=60 align="right">Price</th>
-                </tr>
-            </thead>
-        </table>
+        <div id="purchase-list" style="float:left;">
+            <div style="font-size:16px;color:black;padding-left:20px;margin:15px 0px;">
+                采购计划商品列表<a style="float:right" href="#" id="btn" iconCls="icon-save">保存</a></div>       
+            <div style="background:#fff">
+                <table id="dg" fitColumns="true" style="width:770px;height:auto;">
+                    <thead>
+                        <tr>
+                            <th field="no" width=60>商品编号<th>
+                            <th field="name" width=150 align="center">商品名称</th>
+                            <th field="type_one" width=80 align="center">大类</th>
+                            <th field="type_two" width=80 align="center">中类</th>
+                            <th field="type_three" width=100 align="center">小类</th>
+                            <th field="supplier_name" width=100 align="center">供应商</th>
+                            <th field="quantity" width=60 align="center">数量</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
-        <p class="total">Total: $0</p>
-        <h2>Drop here to add to cart</h2>
-    </div>
+        <div id="good-list" style="float:right;background-color:#EFEFEF;border-left:1px;">
+            <p style="padding-left:20px;"><input id="good-name" style="border:0px;"/></p>
+            <ul class="good" style="width:auto;list-style:none;padding:0px;">
+                <p style="color:">
+                    <span style="visibility:hidden">id</span>
+                    <span style="text-algin:center">商品名称/当前库存/最小库存/最大库存</span>
+                </p>
+                <p class="item">
+                    <span style="visibility:hidden">id</span>
+                    <span>统一牛肉泡面/100/1500/6000</span>
+                </p>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

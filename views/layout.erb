@@ -78,17 +78,18 @@
 			<span class="status-bar-value" id="current_privilege"></span>
 			<span class="status-bar-title">当前时间：</span>
 			<span class="status-bar-value" id="current_time"></span>
+			<span class="status-bar-title"><input id="search"/></span>
 			<span class="status-bar-poweredby">Powered By <a href="mailto:jiyaping0802@gmail.com">jiyaping</a></span>
 		</div>
 	</div>
 	<div region="west" id="nav" split="true" title="导航栏" style="width:280px;padding1:1px;overflow:hidden;">
 		<div class="easyui-accordion" fit="true" border="false">
 			<div title="采购管理">
-				<li onclick="javascript:addTab('添加采购申请','pages/purchasing.html')"><a href="javascript:void(0);">添加采购申请</a></li>
-				<li onclick="javascript:addTab('查看采购计划','pages/purchase.html')"><a href="javascript:void(0);">查看采购计划</a></li>
+				<li onclick=""><a href="javascript:void(0);">添加采购申请</a></li>
+				<li onclick=""><a href="javascript:void(0);">查看采购计划</a></li>
 			</div>
 			<div title="库存管理">
-				<li><a href="#">商品入库</a></li>
+				<li onclick="javascript:addTab('商品入库','pages/inventory.html')"><a href="javascript:void(0);">商品入库</a></li>
 				<li><a href="">商品退库</a></li>
 				<li><a href="">入/出库单</a></li>
 				<li><a href="">废品管理</a></li>
