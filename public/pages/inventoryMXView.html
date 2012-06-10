@@ -51,6 +51,11 @@
                 {field:'area',title:'产地',width:100,rowspan:2,align:'left'},
                 {field:'supplier_id',title:'供应商id',width:100,rowspan:2,align:'center',hidden:true},
                 {field:'supplier_name',title:'供应商名称',width:100,rowspan:2,align:'center'
+                },
+                {field:'reason_flag',title:'入库理由',width:100,rowspan:2,align:'center',
+                     formatter:function(value,row,index){
+                        return InfoChange(4,value);
+                     }
                  },
                 {field:'use_flag',hidden:true},
                 {field:'add_id',hidden:true},
