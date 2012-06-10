@@ -5,6 +5,49 @@ get "/" do
 end
 
 =begin
+	库存模块管理
+=end
+get "/inventory/good/:id" do 
+	content_type 'applicaton/json',:charset=>'utf-8'
+	Log.debug "#{params.inspect}"
+	good = Good.find(params[:id])
+	inv = Inventory.where("good_id=? AND main_flag=?",params[:id],"0").first
+	inv = Inventory.new if inv.nil?
+	good.attributes.merge!(inv.attributes){|k,v1,v2| v1}.to_json
+end
+
+post "/inventory/save" do
+	logger_user(request.path,params.inspect)
+	content_type 'applicaton/json',:charset=>'utf-8'
+
+	Log.debug "#{params.inspect}"
+	if Inventory.do_instock(params[:data])
+		'保存成功'
+	else
+		'保存失败'
+	end
+end
+
+post "/inventoryView" do
+	logger_user(request.path,params.inspect)
+	content_type 'applicaton/json',:charset=>'utf-8'
+
+	return_hash={:total=>Inventory.where("main_flag='0'").size,:rows=>
+		InventoryMX.inventory_mx_view(params["page"],params["rows"],params["queryWord"])}
+	return_hash.to_json
+end
+
+post "/inventoryMXView" do 
+	logger_user(request.path,params.inspect)
+	content_type 'applicaton/json',:charset=>'utf-8'
+
+	return_hash={:total=>Inventory.where("main_flag='0'").size,:rows=>
+		InventoryMX.inventory_mx_view(params["page"],params["rows"],params["queryWord"])}
+
+	return_hash.to_json
+end
+
+=begin
 	主功能模块管理
 =end
 
@@ -45,29 +88,6 @@ post "/:type/:fields" do
 	return_hash.to_json
 end
 
-=begin
-	库存模块管理
-=end
-get "/inventory/good/:id" do 
-	content_type 'applicaton/json',:charset=>'utf-8'
-	Log.debug "#{params.inspect}"
-	good = Good.find(params[:id])
-	inv = Inventory.where("good_id=? AND main_flag=?",params[:id],"0").first
-	inv = Inventory.new if inv.nil?
-	good.attributes.merge!(inv.attributes){|k,v1,v2| v1}.to_json
-end
-
-post "/inventory/save" do
-	logger_user(request.path,params.inspect)
-	content_type 'applicaton/json',:charset=>'utf-8'
-
-	Log.debug "#{params.inspect}"
-	if Inventory.do_instock(params[:data])
-		'保存成功'
-	else
-		'保存失败'
-	end
-end
 
 =begin
 	公共信息模块

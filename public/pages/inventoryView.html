@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>进销存系统首页</title>
+    <link rel="stylesheet" type="text/css" href="../js/themes/gray/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../js/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="../js/application.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/locale/easyui-lang-zh_CN.js"></script>
+    <script>
+    $(function(){
+        $('#dg').datagrid({
+            iconCls:"icon-ok",
+            fit:true,
+            loadMsg:'数据加载中请稍后……',
+            pageSize:13,
+            pageList:[13,20,50,100],
+            striped:true,
+            url:"/inventoryView",
+            idField:"id",
+            singleSelect:true,
+            columns:[[
+                {field:'id',title:'key',rowspan:2,align:'center',hidden:true},
+                {field:'type_one_id',title:'商品大类',width:120,rowspan:2,align:'center',hidden:true},
+                {field:'type_one_name',title:'大类',width:80,rowspan:2,align:'center',
+                     formatter:function(value,row,index){
+                        return value;
+                     }
+                },
+                {field:'type_two_id',title:'商品小类',width:120,rowspan:2,align:'center',hidden:true},
+                {field:'type_two_name',title:'中类',width:80,rowspan:2,align:'center',
+                     formatter:function(value,row,index){
+                        return value;
+                     }
+                },
+                {field:'type_three_id',title:'商品小类',width:120,rowspan:2,align:'center',hidden:true},
+                {field:'type_three_name',title:'小类',width:100,rowspan:2,align:'center',
+                },
+                {field:'no',title:'商品编号',width:100,rowspan:2,align:'center'},
+                {field:'name',title:'商品名称',width:120,rowspan:2,align:'left'},
+                {field:'name_s',title:'商品简称',width:80,rowspan:2,align:'left'},
+                {field:'spec',title:'商品规格',width:60,rowspan:2,align:'center'},
+                {field:'barcode',title:'商品条码',width:100,rowspan:2,align:'center'},
+                {field:'quantity',title:'当前库存量',width:100,rowspan:2,align:'center'},
+                {field:'stock_least',title:'最小库存量',width:100,rowspan:2,align:'center'},
+                {field:'stock_most',title:'最大库存量',width:100,rowspan:2,align:'center'},
+                {field:'unit',title:'计价单位',width:60,rowspan:2,align:'center'},
+                {field:'unit_price',title:'进价',width:60,rowspan:2,align:'center'},
+                {field:'price',title:'售价',width:60,rowspan:2,align:'center'},
+                {field:'area',title:'产地',width:100,rowspan:2,align:'left'},
+                {field:'produce_date',title:'生产日期',width:100,rowspan:2,align:'center'},
+                {field:'valildity_date',title:'有效日期',width:60,rowspan:2,align:'center'},
+                {field:'supplier_id',title:'供应商id',width:100,rowspan:2,align:'center',hidden:true},
+                {field:'supplier_name',title:'供应商名称',width:100,rowspan:2,align:'center'
+                 },
+                {field:'use_flag',hidden:true},
+                {field:'add_id',hidden:true},
+                {field:'add_date',hidden:true},
+                {field:'upd_id',hidden:true},
+                {field:'upd_date',hidden:true}
+                ]],
+            pagination:true,
+            rownumbers:true,
+            toolbar:[{
+                text:'查询',
+                iconCls:'icon-search',
+                handler:function(){
+                    $('#query').window('open');
+                }
+              }
+            ]
+        });
+    });
+    function query(){
+        var queryParams = $('#dg').datagrid('options').queryParams;
+        queryParams.queryWord = $('#qq').val();
+        queryParams.queryType = $('#ss').val();
+        $('#dg').datagrid({
+            url:'/inventoryView'
+        });
+        $('#query').window('close');
+    }
+</script>
+</head>    
+<body class="easyui-layout">
+    <div region="center">
+    <table id="dg"  style="overflow-y:hidden"></table>
+        <div id="query" class="easyui-window" title="查询" style="padding: 10px;width: 400px;height:100;"
+        iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <select name="select" id="ss">
+                                <option value="name">名称</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="id" id="qq"  required="true"></td>
+                        <td><a class="easyui-linkbutton" iconCls="icon-search" href="javascript:void(0);" onclick="query()">查询</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

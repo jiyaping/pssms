@@ -26,7 +26,7 @@ class ActiveRecord::Base
  	# => page_size	每页大小 
  	# => params		查询条件
  	# => add_field	额外需要添加的field	 eg:{"TypeOne"=>"name_s"}
-	def self.easyui_rows(page_num,page_size,params={},add_fi={})
+	def self.easyui_rows(page_num,page_size,params={},add_fields={})
 		keystr = build_query_str(params)
 		keyHash = build_query_hash(params)
 		limit = page_size || 10
@@ -34,8 +34,8 @@ class ActiveRecord::Base
 		offset = (page_num.to_i-1) * page_size.to_i
 		rows = []
 		#puts "l:#{limit} o:#{offset} ks:#{keystr} kh:#{keyHash}"
-		self.where(keystr,keyHash).includes(add_fi.keys).limit(limit).offset(offset).each do |obj|
-			rows<<(obj.attributes.merge!(build_addition_fields(obj,add_fi)))
+		self.where(keystr,keyHash).includes(add_fields.keys).limit(limit).offset(offset).each do |obj|
+			rows<<(obj.attributes.merge!(build_addition_fields(obj,add_fields)))
 		end
 
 		rows
