@@ -33,7 +33,7 @@ post "/inventoryView" do
 	content_type 'applicaton/json',:charset=>'utf-8'
 
 	return_hash={:total=>Inventory.where("main_flag='0'").size,:rows=>
-		InventoryMX.inventory_mx_view(params["page"],params["rows"],params["queryWord"])}
+		Inventory.inventory_view(params["page"],params["rows"],params["queryWord"])}
 	return_hash.to_json
 end
 
@@ -41,7 +41,7 @@ post "/inventoryMXView" do
 	logger_user(request.path,params.inspect)
 	content_type 'applicaton/json',:charset=>'utf-8'
 
-	return_hash={:total=>Inventory.where("main_flag='0'").size,:rows=>
+	return_hash={:total=>InventoryMX.where("main_flag='0'").size,:rows=>
 		InventoryMX.inventory_mx_view(params["page"],params["rows"],params["queryWord"])}
 
 	return_hash.to_json

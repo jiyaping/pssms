@@ -270,7 +270,6 @@
     });
     var count = 0;
     function editRow(index){
-        alert(index);
         $('#dg').datagrid('beginEdit',index);
         temp_arr = $('#dg').datagrid("getEditors",index);
         type_two_name_combobox = temp_arr[1];
@@ -311,7 +310,6 @@
 
     function save(){
         obj = $("#dg").datagrid("getRows");
-        alert(obj);
         $.ajax({
             type:'POST',
             dataType:"json",

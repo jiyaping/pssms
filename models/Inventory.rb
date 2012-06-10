@@ -24,12 +24,13 @@ class Inventory < ActiveRecord::Base
 	#商品入库
 	def self.do_instock(items_hash={})
 		ActiveRecord::Base.transaction do
-			items_hash.each do |k,v|
+			items_hash.values.each do |v|
 				create_inv(v)	#创建库存总表信息
 				InventoryMX.create_inv_mx(v) #创建库存明细表信息
 
-				return true
 			end
+
+			return true
 		end
 	end
 

@@ -1,4 +1,60 @@
-I, [2012-06-10T12:08:51.785631 #3899]  INFO -- : jiyaping  /inventoryMXView  {"page"=>"1", "rows"=>"13"}
-D, [2012-06-10T12:08:51.961793 #3899] DEBUG -- : {:total=>1, :rows=>[{"id"=>1, "purchase_id"=>nil, "purchase_no"=>nil, "good_id"=>4, "type_one_id"=>3, "type_two_id"=>3, "type_three_id"=>1, "good_name"=>"酸菜牛肉面", "good_barcode"=>nil, "good_unit"=>"袋", "unit_price"=>"2", "quantity"=>1111, "arrival_date"=>"2012-06-09 23:24:38", "produce_date"=>"2012-06-05", "expiry_date"=>"123", "supplier_id"=>"1", "supplier_name"=>"广汉大米厂", "enforce_code"=>nil, "check_flag"=>nil, "remark"=>nil, "use_flag"=>"0", "main_flag"=>"0", "add_id"=>nil, "add_date"=>nil, "upd_id"=>nil, "upd_date"=>nil, "no"=>"G000001", "spec"=>"200g", "name"=>"酸菜牛肉面", "name_s"=>"酸菜牛肉面", "picture"=>nil, "barcode"=>"10100101010", "unit"=>"袋", "price"=>4, "area"=>"四川广汉", "valildity_date"=>"123", "shevle_id"=>"1", "shevle_least"=>5, "shevle_most"=>30, "stock_most"=>8000, "stock_least"=>1000, "type_one_name"=>"副食品", "type_two_name"=>"泡面", "type_three_name"=>"统一牌泡面"}]}
-I, [2012-06-10T12:10:30.183559 #3926]  INFO -- : jiyaping  /inventoryMXView  {"page"=>"1", "rows"=>"13"}
-I, [2012-06-10T12:14:27.755046 #3953]  INFO -- : jiyaping  /inventoryMXView  {"page"=>"1", "rows"=>"13"}
+I, [2012-06-10T13:42:23.831752 #2610]  INFO -- : jiyaping  /inventory/save  {"data"=>{"0"=>{"id"=>"", "name"=>"酸菜牛肉面", "good_id"=>"4", "unit_price"=>"2", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"111", "produce_date"=>"2012-06-04", "editing"=>"false"}, "1"=>{"id"=>"", "name"=>"鱼香肉丝面", "good_id"=>"5", "unit_price"=>"3", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"222", "produce_date"=>"2012-06-06", "editing"=>"false"}}}
+D, [2012-06-10T13:42:23.832294 #2610] DEBUG -- : {"data"=>{"0"=>{"id"=>"", "name"=>"酸菜牛肉面", "good_id"=>"4", "unit_price"=>"2", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"111", "produce_date"=>"2012-06-04", "editing"=>"false"}, "1"=>{"id"=>"", "name"=>"鱼香肉丝面", "good_id"=>"5", "unit_price"=>"3", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"222", "produce_date"=>"2012-06-06", "editing"=>"false"}}}
+D, [2012-06-10T13:44:30.973275 #2738] DEBUG -- : id,name {} 10
+D, [2012-06-10T13:44:30.988627 #2738] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:44:33.506706 #2738] DEBUG -- : id,name {"name"=>""} 10
+D, [2012-06-10T13:44:33.508495 #2738] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:44:35.269956 #2738] DEBUG -- : id,name {"type_one_id"=>"3", "name"=>""} 10
+D, [2012-06-10T13:44:35.286947 #2738] DEBUG -- : [{"id"=>3, "name"=>"泡面"}]
+D, [2012-06-10T13:44:36.688617 #2738] DEBUG -- : id,name {"type_one_id"=>"3", "type_two_id"=>"3", "name"=>""} 10
+D, [2012-06-10T13:44:36.711308 #2738] DEBUG -- : [{"id"=>1, "name"=>"统一牌泡面"}]
+D, [2012-06-10T13:44:37.951866 #2738] DEBUG -- : id,name {"type_three_id"=>"1", "name"=>""} 10
+D, [2012-06-10T13:44:37.992000 #2738] DEBUG -- : [{"id"=>4, "name"=>"酸菜牛肉面"}, {"id"=>5, "name"=>"鱼香肉丝面"}]
+D, [2012-06-10T13:44:38.478179 #2738] DEBUG -- : {"splat"=>[], "captures"=>["4"], "id"=>"4"}
+D, [2012-06-10T13:45:03.986417 #2738] DEBUG -- : id,name {} 10
+D, [2012-06-10T13:45:03.988167 #2738] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:45:05.821726 #2738] DEBUG -- : id,name {"name"=>""} 10
+D, [2012-06-10T13:45:05.823034 #2738] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:45:07.926856 #2738] DEBUG -- : id,name {"type_one_id"=>"3", "name"=>""} 10
+D, [2012-06-10T13:45:07.928051 #2738] DEBUG -- : [{"id"=>3, "name"=>"泡面"}]
+D, [2012-06-10T13:45:09.248827 #2738] DEBUG -- : id,name {"type_one_id"=>"3", "type_two_id"=>"3", "name"=>""} 10
+D, [2012-06-10T13:45:09.250000 #2738] DEBUG -- : [{"id"=>1, "name"=>"统一牌泡面"}]
+D, [2012-06-10T13:45:10.427103 #2738] DEBUG -- : id,name {"type_three_id"=>"1", "name"=>""} 10
+D, [2012-06-10T13:45:10.428361 #2738] DEBUG -- : [{"id"=>4, "name"=>"酸菜牛肉面"}, {"id"=>5, "name"=>"鱼香肉丝面"}]
+D, [2012-06-10T13:45:10.929335 #2738] DEBUG -- : {"splat"=>[], "captures"=>["5"], "id"=>"5"}
+D, [2012-06-10T13:45:21.421918 #2738] DEBUG -- : id,name {} 10
+D, [2012-06-10T13:45:21.423214 #2738] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:45:23.474407 #2738] DEBUG -- : id,name {"name"=>""} 10
+D, [2012-06-10T13:45:23.475811 #2738] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:45:25.019167 #2738] DEBUG -- : id,name {"type_one_id"=>"3", "name"=>""} 10
+D, [2012-06-10T13:45:25.020260 #2738] DEBUG -- : [{"id"=>3, "name"=>"泡面"}]
+D, [2012-06-10T13:45:26.594852 #2738] DEBUG -- : id,name {"type_one_id"=>"3", "type_two_id"=>"3", "name"=>""} 10
+D, [2012-06-10T13:45:26.596069 #2738] DEBUG -- : [{"id"=>1, "name"=>"统一牌泡面"}]
+D, [2012-06-10T13:45:28.073078 #2738] DEBUG -- : id,name {"type_three_id"=>"1", "name"=>""} 10
+D, [2012-06-10T13:45:28.074476 #2738] DEBUG -- : [{"id"=>4, "name"=>"酸菜牛肉面"}, {"id"=>5, "name"=>"鱼香肉丝面"}]
+D, [2012-06-10T13:45:28.805085 #2738] DEBUG -- : {"splat"=>[], "captures"=>["4"], "id"=>"4"}
+I, [2012-06-10T13:45:43.328596 #2738]  INFO -- : jiyaping  /inventory/save  {"data"=>{"0"=>{"id"=>"", "name"=>"鱼香肉丝面", "good_id"=>"5", "unit_price"=>"2", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"111", "produce_date"=>"2012-06-05", "editing"=>"false"}, "1"=>{"id"=>"", "name"=>"酸菜牛肉面", "good_id"=>"4", "unit_price"=>"3", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"222", "produce_date"=>"2012-06-05", "editing"=>"false"}}}
+D, [2012-06-10T13:45:43.328951 #2738] DEBUG -- : {"data"=>{"0"=>{"id"=>"", "name"=>"鱼香肉丝面", "good_id"=>"5", "unit_price"=>"2", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"111", "produce_date"=>"2012-06-05", "editing"=>"false"}, "1"=>{"id"=>"", "name"=>"酸菜牛肉面", "good_id"=>"4", "unit_price"=>"3", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"222", "produce_date"=>"2012-06-05", "editing"=>"false"}}}
+D, [2012-06-10T13:46:02.031296 #2738] DEBUG -- : id,name {} 10
+D, [2012-06-10T13:46:02.032887 #2738] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:46:17.824941 #2738] DEBUG -- : id,name {} 10
+D, [2012-06-10T13:46:17.826126 #2738] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+I, [2012-06-10T13:46:24.512875 #2738]  INFO -- : jiyaping  /inventory/save  {"data"=>{"0"=>{"id"=>"", "name"=>"鱼香肉丝面", "good_id"=>"5", "unit_price"=>"2", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"1000", "produce_date"=>"2012-06-05", "editing"=>"false"}, "1"=>{"id"=>"", "name"=>"酸菜牛肉面", "good_id"=>"4", "unit_price"=>"3", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"2000", "produce_date"=>"2012-06-05", "editing"=>"false"}}}
+D, [2012-06-10T13:46:24.513243 #2738] DEBUG -- : {"data"=>{"0"=>{"id"=>"", "name"=>"鱼香肉丝面", "good_id"=>"5", "unit_price"=>"2", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"1000", "produce_date"=>"2012-06-05", "editing"=>"false"}, "1"=>{"id"=>"", "name"=>"酸菜牛肉面", "good_id"=>"4", "unit_price"=>"3", "price"=>"", "valildity_date"=>"", "stock_most"=>"8000", "quantity"=>"0", "type_one_id"=>"3", "type_two_id"=>"3", "type_three_id"=>"1", "use_flag"=>"0", "typeone_name"=>"副食品", "typetwo_name"=>"泡面", "typethree_name"=>"统一牌泡面", "quantity_inf"=>"2000", "produce_date"=>"2012-06-05", "editing"=>"false"}}}
+I, [2012-06-10T13:47:46.155625 #2738]  INFO -- : jiyaping  /inventoryView  {"page"=>"1", "rows"=>"13"}
+I, [2012-06-10T13:47:59.593516 #2738]  INFO -- : jiyaping  /inventoryMXView  {"page"=>"1", "rows"=>"13"}
+I, [2012-06-10T13:48:03.372952 #2738]  INFO -- : jiyaping  /inventoryView  {"page"=>"1", "rows"=>"13"}
+I, [2012-06-10T13:48:15.131274 #2738]  INFO -- : jiyaping  /inventoryMXView  {"page"=>"1", "rows"=>"13"}
+I, [2012-06-10T13:51:46.047956 #2738]  INFO -- : jiyaping  /inventoryView  {"page"=>"1", "rows"=>"13"}
+I, [2012-06-10T13:52:21.341873 #2951]  INFO -- : jiyaping  /inventory/save  {}
+D, [2012-06-10T13:52:21.342322 #2951] DEBUG -- : {}
+D, [2012-06-10T13:52:22.802018 #2951] DEBUG -- : id,name {} 10
+D, [2012-06-10T13:52:22.817656 #2951] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:52:37.532461 #2951] DEBUG -- : id,name {"name"=>""} 10
+D, [2012-06-10T13:52:37.534343 #2951] DEBUG -- : [{"id"=>1, "name"=>"家用电器t"}, {"id"=>2, "name"=>"日用品"}, {"id"=>3, "name"=>"副食品"}, {"id"=>4, "name"=>"常见水果"}, {"id"=>5, "name"=>"蔬菜"}]
+D, [2012-06-10T13:52:39.439522 #2951] DEBUG -- : id,name {"type_one_id"=>"3", "name"=>""} 10
+D, [2012-06-10T13:52:39.455781 #2951] DEBUG -- : [{"id"=>3, "name"=>"泡面"}]
+D, [2012-06-10T13:52:41.190929 #2951] DEBUG -- : id,name {"type_one_id"=>"3", "type_two_id"=>"3", "name"=>""} 10
+D, [2012-06-10T13:52:41.213146 #2951] DEBUG -- : [{"id"=>1, "name"=>"统一牌泡面"}]
+I, [2012-06-10T13:52:45.990490 #2951]  INFO -- : jiyaping  /inventoryView  {"page"=>"1", "rows"=>"13"}
+I, [2012-06-10T13:52:57.882070 #2951]  INFO -- : jiyaping  /inventoryMXView  {"page"=>"1", "rows"=>"13"}
